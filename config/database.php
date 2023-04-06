@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION_HCM', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => env('DB_DATABASE_HCM', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
@@ -46,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST_HCM', '127.0.0.1'),
+            'port' => env('DB_PORT_HCM', '3306'),
+            'database' => env('DB_DATABASE_HCM', 'forge'),
+            'username' => env('DB_USERNAME_HCM', 'forge'),
+            'password' => env('DB_PASSWORD_HCM', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -66,11 +66,11 @@ return [
         'PHIS-V2' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_PHIS', '127.0.0.1'),
-            'port' => env('DB_PORT_PHIS', '5432'),
-            'database' => env('DB_DATABASE_PHIS', 'forge'),
-            'username' => env('DB_USERNAME_PHIS', 'forge'),
-            'password' => env('DB_PASSWORD_PHIS', ''),
+            'host' => env('DB_HOST_HCM_PHIS', '127.0.0.1'),
+            'port' => env('DB_PORT_HCM_PHIS', '5432'),
+            'database' => env('DB_DATABASE_HCM_PHIS', 'forge'),
+            'username' => env('DB_USERNAME_HCM_PHIS', 'forge'),
+            'password' => env('DB_PASSWORD_HCM_PHIS', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -81,11 +81,11 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST_HCM', '127.0.0.1'),
+            'port' => env('DB_PORT_HCM', '5432'),
+            'database' => env('DB_DATABASE_HCM', 'forge'),
+            'username' => env('DB_USERNAME_HCM', 'forge'),
+            'password' => env('DB_PASSWORD_HCM', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -96,11 +96,11 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST_HCM', 'localhost'),
+            'port' => env('DB_PORT_HCM', '1433'),
+            'database' => env('DB_DATABASE_HCM', 'forge'),
+            'username' => env('DB_USERNAME_HCM', 'forge'),
+            'password' => env('DB_PASSWORD_HCM', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -138,7 +138,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME_HCM', 'laravel'), '_').'_database_'),
         ],
 
         'default' => [

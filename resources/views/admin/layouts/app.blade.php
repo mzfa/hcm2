@@ -7,16 +7,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>{{ env('APP_NAME')}}</title>
+    <title>{{ env('APP_NAME_HCM')}}</title>
 
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO')) }}" sizes="180x180">
-    <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="32x32" type="image/png">
-    <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="180x180">
+    <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,8 +119,8 @@
                 </div>
                 <div class="col align-self-center text-center">
                     <div class="logo-small">
-                        <img src="{{ asset(env('APP_LOGO')) }}" alt="">
-                        <h5>{{ env('APP_NAME')}}</h5>
+                        <img src="{{ asset(env('APP_LOGO_HCM')) }}" alt="">
+                        <h5>{{ env('APP_NAME_HCM')}}</h5>
                     </div>
                 </div>
                 <div class="col-auto">

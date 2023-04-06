@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ env('APP_NAME_HCM') }}</title>
 
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,9 +35,9 @@
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 
-    <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO')) }}" sizes="180x180">
-  <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="32x32" type="image/png">
-  <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="180x180">
+  <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="16x16" type="image/png">
     <script>
         window.dataLayer = window.dataLayer || [];
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; {{ env('APP_NAME') }}</title>
+  <title>Login &mdash; {{ env('APP_NAME_HCM') }}</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -15,9 +15,9 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-  <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO')) }}" sizes="180x180">
-  <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="32x32" type="image/png">
-  <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="180x180">
+  <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ asset(env('APP_LOGO_HCM')) }}" sizes="16x16" type="image/png">
 <!-- Start GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 <script>
@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-              <img src="{{ asset(env('APP_LOGO')) }}" alt="logo" width="300" class="shadow-light rounded-circle">
+              <img src="{{ asset(env('APP_LOGO_HCM')) }}" alt="logo" width="300" class="shadow-light rounded-circle">
             </div>
 
             <div class="card card-primary">
