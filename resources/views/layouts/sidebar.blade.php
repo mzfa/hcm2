@@ -1,6 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
+            <img src="{{ asset(env('APP_LOGO_HCM')) }}" alt="logo" width="80" class="shadow-light rounded-circle">
             <a href="index.html">{{ env('APP_NAME_HCM') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
@@ -10,6 +11,11 @@
             <li>
                 <a class="nav-link" href="{{ url('/home') }}"><i class="fas fa-fire"></i> <span>Home</span></a>
             </li>
+            @if(Auth::user()->id != 0)
+            <li>
+                <a class="nav-link" href="{{ url('/profile') }}"><i class="fas fa-user"></i> <span>Profil</span></a>
+            </li>
+            @endif
             @php
                 $sidebar = Session('menu');
                 // dump($sidebar);
@@ -56,12 +62,10 @@
                     @endif
                 @endforeach
             @endisset
-            <li>
-                <form action="{{ route('logout') }}" method="post" id="logout">
-                    @csrf
-                </form>
-                <a class="nav-link" onclick="return document.getElementById('logout').submit()"><i class="fas fa-sign-out-alt"></i>Logout</a>
-            </li>
+            <form action="{{ route('logout') }}" method="post" id="logout">
+                @csrf
+            </form>
+            <li><a class="nav-link" onclick="return document.getElementById('logout').submit()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
             {{-- <li class="menu-header">Dashboard</li> --}}
             {{-- <li class="dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i

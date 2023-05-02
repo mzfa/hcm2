@@ -90,7 +90,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(PegawaiController::class)->middleware('cek_login:pegawai.index')->group(function () {
         Route::get('/pegawai', 'index')->name('pegawai.index');
         Route::get('/pegawai/edit/{id}', 'edit');
+        Route::get('/pegawai/add', 'add');
         Route::get('/pegawai/sync', 'sync');
+        Route::post('/pegawai/store', 'store');
+        Route::post('/pegawai/update_data_diri', 'update_data_diri');
+        Route::post('/pegawai/tambah_keluarga', 'tambah_keluarga');
+        Route::post('/pegawai/update_alamat', 'update_alamat');
+        Route::post('/pegawai/tambah_pendidikan', 'tambah_pendidikan');
+        Route::get('/pegawai/hapus_pendidikan/{id}', 'hapus_pendidikan');
+        Route::get('/pegawai/hapus_keluarga/{id}', 'hapus_keluarga');
+        Route::get('/pegawai/table_keluarga/{id}', 'table_keluarga');
+        Route::get('/pegawai/table_pendidikan/{id}', 'table_pendidikan');
         Route::post('/pegawai/update', 'update');
     });
     Route::controller(JenisPendidikanController::class)->middleware('cek_login:jenis_pendidikan.index')->group(function () {
@@ -125,12 +135,20 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/jenis_pelatihan/delete/{id}', 'delete');
     });
     
-    Route::controller(ProfileController::class)->middleware('cek_login:profile.index')->group(function () {
+    Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'index')->name('profile.index');
         Route::get('/profile/sync', 'sync');
         Route::post('/profile/alamat', 'alamat');
         Route::post('/profile/kontak', 'kontak');
         Route::post('/profile/updateProfile', 'updateProfile');
+        Route::post('/profile/update_data_diri', 'update_data_diri');
+        Route::post('/profile/tambah_keluarga', 'tambah_keluarga');
+        Route::post('/profile/update_alamat', 'update_alamat');
+        Route::post('/profile/tambah_pendidikan', 'tambah_pendidikan');
+        Route::get('/profile/hapus_pendidikan/{id}', 'hapus_pendidikan');
+        Route::get('/profile/hapus_keluarga/{id}', 'hapus_keluarga');
+        Route::get('/profile/table_keluarga/{id}', 'table_keluarga');
+        Route::get('/profile/table_pendidikan/{id}', 'table_pendidikan');
     });
     Route::controller(PekerjaanController::class)->middleware('cek_login:pekerjaan.index')->group(function () {
         Route::get('/pekerjaan', 'index')->name('pekerjaan.index');

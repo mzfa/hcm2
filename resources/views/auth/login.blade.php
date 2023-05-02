@@ -29,7 +29,7 @@
 </script>
 <!-- /END GA --></head>
 
-<body style="background-color: #eeeeee">
+<body style="background: url({{ url('assets/img/gedung_rs.png') }}) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
   <div id="app">
     <section class="section">
       <div class="container mt-5">

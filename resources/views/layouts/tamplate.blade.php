@@ -54,28 +54,7 @@
 </head>
 
 <body>
-
-    <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-            
-            @include('layouts.navbar')
-
-            @include('layouts.sidebar')
-
-            <!-- Main Content -->
-            <div class="main-content">
-                @yield('content')
-            </div>
-            <footer class="main-footer">
-                <div class="footer-left">
-                    RS Umum Pekerja 2023
-                </div>
-                <div class="footer-right">
-
-                </div>
-            </footer>
-        </div>
-    </div>
+    @yield('content')
 
 
   <!-- General JS Scripts -->
@@ -128,15 +107,6 @@
     iziToast.success({
         title: 'Good!',
         message: "{{ Session::get('success') }}",
-        position: 'topCenter' 
-    });
-</script>
-@endif
-@if (Session::has('error'))
-<script>
-    iziToast.warning({
-        title: 'Error!',
-        message: "{{ Session::get('error') }}",
         position: 'topCenter' 
     });
 </script>

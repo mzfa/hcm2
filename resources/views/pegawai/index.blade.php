@@ -19,8 +19,11 @@
                     <div class="card-header">
                         <h4>Pegawai</h4>
                         <div class="col-auto">
-                            <a tooltip="Sync Data Pegawai" href="{{ url('pegawai/sync') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
+                            {{-- <a tooltip="Sync Data Pegawai" href="{{ url('pegawai/sync') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
                                 <i class="bi bi-sync"></i> Sync
+                            </a> --}}
+                            <a tooltip="Tambah Pegawai Baru" href="{{ url('pegawai/add') }}" id="create_record" class="btn btn-primary text-white shadow-sm">
+                                <i class="bi bi-sync"></i> Tambah Pegawai Baru
                             </a>
                         </div>
                     </div>
@@ -48,7 +51,7 @@
                                             <td>{{ $pegawai->nama_profesi }}</td>
                                             <td>{{ $pegawai->nama_struktur }}</td>
                                             {{-- <td><a onclick="return edit({{ $pegawai->pegawai_id }})" class="btn text-white btn-info">Edit</a></td> --}}
-                                            <td><a href="{{ url('pegawai/edit/'.$pegawai->pegawai_id) }}" class="btn text-white btn-info">Edit</a></td>
+                                            <td><a href="{{ url('pegawai/edit/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-info">Edit</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

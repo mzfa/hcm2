@@ -9,36 +9,50 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $id = Auth::user()->id;
-        $data = DB::table('users')
-        ->leftJoin('pegawai', 'users.pegawai_id', '=', 'pegawai.pegawai_id')
-        ->leftJoin('pegawai_detail', 'users.pegawai_id', '=', 'pegawai_detail.pegawai_id')
+        $id = Auth::user()->pegawai_id;
+        // $data = DB::table('users')
+        // ->leftJoin('pegawai', 'users.pegawai_id', '=', 'pegawai.pegawai_id')
+        // ->leftJoin('pegawai_detail', 'users.pegawai_id', '=', 'pegawai_detail.pegawai_id')
+        // ->leftJoin('bagian', 'pegawai.bagian_id', '=', 'bagian.bagian_id')
+        // ->leftJoin('profesi', 'pegawai.profesi_id', '=', 'profesi.profesi_id')
+        // ->select([
+        //     'users.username',
+        //     'pegawai.*',
+        //     'pegawai.pegawai_id AS idpeg',
+        //     'pegawai_detail.*',
+        //     'bagian.nama_bagian',
+        //     'profesi.nama_profesi'
+        // ])
+        // ->whereNull('pegawai.deleted_at')
+        // ->where(['id' => $id])
+        // ->get();
+        $data = DB::table('pegawai')
         ->leftJoin('bagian', 'pegawai.bagian_id', '=', 'bagian.bagian_id')
         ->leftJoin('profesi', 'pegawai.profesi_id', '=', 'profesi.profesi_id')
         ->select([
-            'users.username',
             'pegawai.*',
-            'pegawai.pegawai_id AS idpeg',
-            'pegawai_detail.*',
             'bagian.nama_bagian',
             'profesi.nama_profesi'
-        ])
+            ])
         ->whereNull('pegawai.deleted_at')
-        ->where(['id' => $id])
-        ->get();
-        $provinsi = DB::table('pegawai_detail')->distinct()->get(['provinsi']);
-        $kabupaten = DB::table('pegawai_detail')->distinct()->get(['kabupaten']);
-        // dd($provinsi);
-        if(isset($data[0])){
-            $data = $data[0];
+        ->where(['pegawai.pegawai_id' => $id])
+        ->first();
+        // dd($data);
+        if(empty($data)){
+            return Redirect::back()->with(['error' => 'Anda belum di daftarkan sebagai pegawai!']);
         }
-        return view('profile.index', compact('data','provinsi','kabupaten'));
+            // $bagian = DB::table('bagian')->get();
+        $jenis_pendidikan = DB::table('jenis_pendidikan')->whereNull('jenis_pendidikan.deleted_at')->get();
+        $keluarga_pegawai = DB::table('keluarga_pegawai')->where('pegawai_id', $id)->get();
+        $pendidikan_pegawai = DB::table('pendidikan_pegawai')->leftJoin('jenis_pendidikan', 'jenis_pendidikan.jenis_pendidikan_id', '=', 'pendidikan_pegawai.jenis_pendidikan_id')->where('pegawai_id', $id)->get();
+        return view('profile.index', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan'));
     }
 
     public function alamat(Request $request){
@@ -136,5 +150,144 @@ class ProfileController extends Controller
             }
         }
         return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+
+    public function tambah_keluarga(Request $request){
+        $pegawai_id = Crypt::decrypt($request->pegawai_id);
+        $data = [
+            'created_by' => Auth::user()->id,
+            'created_at' => now(),
+            'status_keluarga' => $request->status_keluarga,
+            'nama_lengkap_kel' => $request->nama_lengkap_kel,
+            'tempat_lahir_kel' => $request->tempat_lahir_kel,
+            'tanggal_lahir_kel' => $request->tanggal_lahir_kel,
+            'pendidikan_terakhir_kel' => $request->pendidikan_terakhir_kel,
+            'jk_kel' => $request->jk_kel,
+            'golongan_darah_kel' => $request->golongan_darah_kel,
+            'no_mr_kel' => $request->no_mr_kel,
+            'pegawai_id' => $pegawai_id,
+        ];
+        // dd($data);
+        DB::table('keluarga_pegawai')->insert($data);
+        return true;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+    public function tambah_pendidikan(Request $request){
+        $pegawai_id = Crypt::decrypt($request->pegawai_id);
+        $data = [
+            'created_by' => Auth::user()->id,
+            'created_at' => now(),
+            'jenis_pendidikan_id' => $request->jenis_pendidikan,
+            'nama_sekolah' => $request->nama_sekolah,
+            'tahun_lulus' => $request->tahun_lulus,
+            'jurusan' => $request->jurusan,
+            'pegawai_id' => $pegawai_id,
+        ];
+        // dd($data);
+        DB::table('pendidikan_pegawai')->insert($data);
+        return true;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+
+    public function update_data_diri(Request $request){
+        // dd($request);
+        $pegawai_id = Crypt::decrypt($request->pegawai_id);
+        $data = [
+            'updated_by' => Auth::user()->id,
+            'updated_at' => now(),
+            'nama_pegawai' => $request->nama_pegawai,
+            'gelar' => $request->gelar,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'agama' => $request->agama,
+            'jk' => $request->jk,
+            'golongan_darah' => $request->golongan_darah,
+            'status_kawin' => $request->status_kawin,
+            'nik' => $request->nik,
+            'npwp' => $request->npwp,
+            'str' => $request->str,
+            'sip' => $request->sip,
+            'no_bpjs_kes' => $request->no_bpjs_kes,
+            'no_bpjs_tk' => $request->no_bpjs_tk,
+            'no_mr' => $request->no_mr,
+            'email' => $request->email,
+        ];
+        // dd($data);
+        DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
+        return true;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+    public function update_alamat(Request $request){
+        // dd($request);
+        $pegawai_id = Crypt::decrypt($request->pegawai_id);
+        
+        $alamat = $request->alamat;
+        $provinsi = $request->provinsi;
+        $kota = $request->kota;
+        $kelurahan = $request->kelurahan;
+
+        if(isset($request->check_alamat)){
+            $alamat = $request->alamat_ktp;
+            $provinsi = $request->provinsi_ktp;
+            $kota = $request->kota_ktp;
+            $kelurahan = $request->kelurahan_ktp;
+        }
+
+
+        $data = [
+            'updated_by' => Auth::user()->id,
+            'updated_at' => now(),
+            'telp_pribadi' => $request->telp_pribadi,
+            'telp_keluarga' => $request->telp_keluarga,
+            'nomor_kontak_darurat' => $request->nomor_kontak_darurat,
+            'nama_kontak_darurat' => $request->nama_kontak_darurat,
+            'alamat_ktp' => $request->alamat_ktp,
+            'provinsi_ktp' => $request->provinsi_ktp,
+            'kota_ktp' => $request->kota_ktp,
+            'kelurahan_ktp' => $request->kelurahan_ktp,
+            'alamat' => $alamat,
+            'provinsi' => $provinsi,
+            'kota' => $kota,
+            'kelurahan' => $kelurahan,
+        ];
+        // dd($data);
+        DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
+        return true;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+
+    public function table_pendidikan($id){
+        $pegawai_id = Crypt::decrypt($id);
+        $pendidikan_pegawai = DB::table('pendidikan_pegawai')->leftJoin('jenis_pendidikan', 'jenis_pendidikan.jenis_pendidikan_id', '=', 'pendidikan_pegawai.jenis_pendidikan_id')->whereNull('pendidikan_pegawai.deleted_at')->where('pegawai_id', $pegawai_id)->get();
+        return view('table.pendidikan_pegawai', compact('pendidikan_pegawai'));
+    }
+    
+    public function table_keluarga($id){
+        $pegawai_id = Crypt::decrypt($id);
+        $keluarga_pegawai = DB::table('keluarga_pegawai')->whereNull('keluarga_pegawai.deleted_at')->where('pegawai_id', $pegawai_id)->get();
+        return view('table.keluarga_pegawai', compact('keluarga_pegawai'));
+    }
+
+    public function hapus_pendidikan($id){
+        $id = Crypt::decrypt($id);
+        // if($data = DB::select("SELECT * FROM tbl_menu WHERE menu_id='$id'")){
+        //     DB::select("DELETE FROM tbl_menu WHERE menu_id='$id'");
+        // }
+        $data = [
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => now(),
+        ];
+        DB::table('pendidikan_pegawai')->where(['pendidikan_pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
+    }
+
+    public function hapus_keluarga($id){
+        $id = Crypt::decrypt($id);
+        $data = [
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => now(),
+        ];
+        DB::table('keluarga_pegawai')->where(['keluarga_pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
     }
 }
