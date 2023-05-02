@@ -50,9 +50,10 @@ class ProfileController extends Controller
         }
             // $bagian = DB::table('bagian')->get();
         $jenis_pendidikan = DB::table('jenis_pendidikan')->whereNull('jenis_pendidikan.deleted_at')->get();
+        $jenis_pelatihan = DB::table('jenis_pelatihan')->whereNull('jenis_pelatihan.deleted_at')->get();
         $keluarga_pegawai = DB::table('keluarga_pegawai')->where('pegawai_id', $id)->get();
         $pendidikan_pegawai = DB::table('pendidikan_pegawai')->leftJoin('jenis_pendidikan', 'jenis_pendidikan.jenis_pendidikan_id', '=', 'pendidikan_pegawai.jenis_pendidikan_id')->where('pegawai_id', $id)->get();
-        return view('profile.index', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan'));
+        return view('profile.index', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan','jenis_pelatihan'));
     }
 
     public function alamat(Request $request){
@@ -188,6 +189,46 @@ class ProfileController extends Controller
         return true;
         // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
     }
+    public function tambah_pekerjaan(Request $request){
+        $pegawai_id = Crypt::decrypt($request->pegawai_id);
+        // dd($request);
+        $data = [
+            'created_by' => Auth::user()->id,
+            'created_at' => now(),
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'bagian' => $request->bagian,
+            'tanggal_masuk_kerja' => $request->tanggal_masuk_kerja,
+            'tanggal_keluar_kerja' => $request->tanggal_keluar_kerja,
+            'pegawai_id' => $pegawai_id,
+        ];
+        // dd($data);
+        DB::table('riwayat_pekerjaan_pegawai')->insert($data);
+        return true;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+    public function tambah_pelatihan(Request $request){
+        // dd($request->hasFile('bukti_pelatihan'));
+        if($request->hasFile('bukti_pelatihan')){
+            $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
+            // dd($bukti_pelatihan);
+            $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
+            $pegawai_id = Crypt::decrypt($request->pegawai_id);
+            $data = [
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+                'jenis_pelatihan_id' => $request->jenis_pelatihan,
+                'nama_pelatihan' => $request->nama_pelatihan,
+                'tanggal_pelatihan' => $request->tanggal_pelatihan,
+                'penyelenggara' => $request->penyelenggara,
+                'bukti_pelatihan' => $bukti_pelatihan,
+                'pegawai_id' => $pegawai_id,
+            ];
+            DB::table('pelatihan_pegawai')->insert($data);
+            return true;
+        }
+        return false;
+        // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
 
     public function update_data_diri(Request $request){
         // dd($request);
@@ -268,6 +309,17 @@ class ProfileController extends Controller
         return view('table.keluarga_pegawai', compact('keluarga_pegawai'));
     }
 
+    public function table_riwayat_pekerjaan($id){
+        $pegawai_id = Crypt::decrypt($id);
+        $riwayat_pekerjaan_pegawai = DB::table('riwayat_pekerjaan_pegawai')->whereNull('riwayat_pekerjaan_pegawai.deleted_at')->where('pegawai_id', $pegawai_id)->get();
+        return view('table.riwayat_pekerjaan_pegawai', compact('riwayat_pekerjaan_pegawai'));
+    }
+    public function table_pelatihan($id){
+        $pegawai_id = Crypt::decrypt($id);
+        $pelatihan_pegawai = DB::table('pelatihan_pegawai')->whereNull('pelatihan_pegawai.deleted_at')->where('pegawai_id', $pegawai_id)->get();
+        return view('table.pelatihan_pegawai', compact('pelatihan_pegawai'));
+    }
+
     public function hapus_pendidikan($id){
         $id = Crypt::decrypt($id);
         // if($data = DB::select("SELECT * FROM tbl_menu WHERE menu_id='$id'")){
@@ -288,6 +340,25 @@ class ProfileController extends Controller
             'deleted_at' => now(),
         ];
         DB::table('keluarga_pegawai')->where(['keluarga_pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
+    }
+
+    public function hapus_pekerjaan($id){
+        $id = Crypt::decrypt($id);
+        $data = [
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => now(),
+        ];
+        DB::table('riwayat_pekerjaan_pegawai')->where(['riwayat_pekerjaan_pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
+    }
+    public function hapus_pelatihan($id){
+        $id = Crypt::decrypt($id);
+        $data = [
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => now(),
+        ];
+        DB::table('pelatihan_pegawai')->where(['pelatihan_pegawai_id' => $id])->update($data);
         return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
     }
 }
