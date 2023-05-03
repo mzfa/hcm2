@@ -102,9 +102,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Tgl Lahir <em class="text-danger">*</em></label>
-                                                    <input type="text" name="tgl_lahir"
+                                                    <input type="text" name="tanggal_lahir"
                                                         class="form-control datepicker required"
-                                                        placeholder="Tanggal Lahir" id="tgl_lahir" required
+                                                        placeholder="Tanggal Lahir" id="tanggal_lahir" required
                                                         value="{{ $data->tanggal_lahir }}">
                                                 </div>
                                             </div>

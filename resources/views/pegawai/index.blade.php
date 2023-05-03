@@ -45,7 +45,12 @@
                                     @foreach ($data as $pegawai)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pegawai->nama_pegawai }}</td>
+                                            <td>
+                                                {{ $pegawai->nama_pegawai }}
+                                                @if(is_null($pegawai->tanggal_lahir) && is_null($pegawai->status_kawin) && is_null($pegawai->alamat) && is_null($pegawai->telp_pribadi) && is_null($pegawai->kelurahan))
+                                                    <span class="badge badge-danger">Belum Lengkap</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $pegawai->nip }}</td>
                                             <td>{{ $pegawai->nama_bagian }}</td>
                                             <td>{{ $pegawai->nama_profesi }}</td>

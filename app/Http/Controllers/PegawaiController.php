@@ -20,11 +20,8 @@ class PegawaiController extends Controller
         ->leftJoin('pegawai_detail', 'pegawai.pegawai_id', '=', 'pegawai_detail.pegawai_id')
         ->leftJoin('struktur', 'pegawai_detail.struktur_id', '=', 'struktur.struktur_id')
         ->select([
-            'pegawai.pegawai_id',
-            'pegawai.nama_pegawai',
-            'pegawai_detail.struktur_id',
+            'pegawai.*',
             'struktur.nama_struktur',
-            'pegawai.nip',
             'bagian.nama_bagian',
             'profesi.nama_profesi'
         ])

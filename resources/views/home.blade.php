@@ -16,7 +16,7 @@
                         <h4>Pendidikan</h4>
                     </div>
                     <div class="card-body">
-                        10
+                        {{ $jenis_pendidikan }}
                     </div>
                 </div>
             </div>
@@ -28,10 +28,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Pelatihan</h4>
+                        <h4>Semua Pegawai</h4>
                     </div>
                     <div class="card-body">
-                        42
+                        {{ $pegawai }}
                     </div>
                 </div>
             </div>
@@ -43,10 +43,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Kompetensi</h4>
+                        <h4>Keluarga Pegawai</h4>
                     </div>
                     <div class="card-body">
-                        1,201
+                        {{ $keluarga_pegawai }}
                     </div>
                 </div>
             </div>
@@ -58,10 +58,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Sertifikasi</h4>
+                        <h4>Pelatihan Pegawai</h4>
                     </div>
                     <div class="card-body">
-                        47
+                        {{ $pelatihan_pegawai }}
                     </div>
                 </div>
             </div>
