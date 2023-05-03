@@ -95,9 +95,7 @@
         //     'excel', 'pdf', 'print'
         // ]
     });
-    if(jQuery().select2) {
-        $(".select2").select2();
-    }
+    
   </script>
 
 @yield('scripts')

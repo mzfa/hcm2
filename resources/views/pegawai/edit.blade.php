@@ -250,6 +250,18 @@
                                                         value="{{ $data->email }}">
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Struktur</label>
+                                                    <select name="struktur_id" id="struktur_id" class="form-control">
+                                                        <option value="">Pilih Struktur</option>
+                                                        @foreach($struktur as $item)
+                                                        <option @if($data->struktur_id == $item->struktur_id) selected @endif
+                                                            value="{{ $item->struktur_id }}">{{ $item->nama_struktur }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <button type="button" id="savedata"
                                             class="btn btn-primary w-100 mb-2">Simpan</button>

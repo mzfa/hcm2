@@ -48,13 +48,14 @@ class PegawaiController extends Controller
         // dd($data);
         // $bagian = DB::table('bagian')->get();
         $jenis_pendidikan = DB::table('jenis_pendidikan')->whereNull('jenis_pendidikan.deleted_at')->get();
+        $struktur = DB::table('struktur')->whereNull('struktur.deleted_at')->get();
         $jenis_pelatihan = DB::table('jenis_pelatihan')->whereNull('jenis_pelatihan.deleted_at')->get();
         $keluarga_pegawai = DB::table('keluarga_pegawai')->where('pegawai_id', $id)->get();
         $pendidikan_pegawai = DB::table('pendidikan_pegawai')->leftJoin('jenis_pendidikan', 'jenis_pendidikan.jenis_pendidikan_id', '=', 'pendidikan_pegawai.jenis_pendidikan_id')->where('pegawai_id', $id)->get();
         // $provinsi = DB::table('pegawai_detail')->distinct()->get(['provinsi']);
         // $kabupaten = DB::table('pegawai_detail')->distinct()->get(['kabupaten']);
         // $data = DB::select("SELECT * FROM pegawai WHERE pegawai_id='$id'");
-        return view('pegawai.edit', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan','jenis_pelatihan'));
+        return view('pegawai.edit', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan','jenis_pelatihan','struktur'));
     }
 
     public function add()
@@ -89,6 +90,11 @@ class PegawaiController extends Controller
         ];
         // dd($nip);
         DB::table('pegawai')->insert($data);
+        $dataa = [
+            'pegawai_id' => $pegawai_id,
+            'struktur_id' => $request->struktur_id,
+        ];
+        DB::table('pegawai_detail')->insert($dataa);
         // return true;
         return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
     }
@@ -193,9 +199,14 @@ class PegawaiController extends Controller
             'no_bpjs_tk' => $request->no_bpjs_tk,
             'no_mr' => $request->no_mr,
             'email' => $request->email,
+            'struktur_id' => $request->struktur_id,
         ];
         // dd($data);
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
+        $dataa = [
+            'struktur_id' => $request->struktur_id,
+        ];
+        DB::table('pegawai_detail')->where(['pegawai_id' => $pegawai_id])->update($dataa);
         return true;
         // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
     }
