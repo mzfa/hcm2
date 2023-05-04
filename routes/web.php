@@ -15,6 +15,7 @@ use App\Http\Controllers\JenisPendidikanController;
 use App\Http\Controllers\JenisKompetensiController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\JenisPelatihanController;
+use App\Http\Controllers\GrupKepegawaianController;
 use App\Http\Controllers\KompetensiController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PelatihanController;
@@ -139,6 +140,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/jenis_pelatihan/update', 'update');
         Route::get('/jenis_pelatihan/edit/{id}', 'edit');
         Route::get('/jenis_pelatihan/delete/{id}', 'delete');
+    });
+    Route::controller(GrupKepegawaianController::class)->middleware('cek_login:grup_kepegawaian.index')->group(function () {
+        Route::get('/grup_kepegawaian', 'index')->name('grup_kepegawaian.index');
+        Route::get('/grup_kepegawaian/sync', 'sync');
+        Route::post('/grup_kepegawaian/store', 'store');
+        Route::post('/grup_kepegawaian/update', 'update');
+        Route::get('/grup_kepegawaian/edit/{id}', 'edit');
+        Route::get('/grup_kepegawaian/delete/{id}', 'delete');
     });
     
     Route::controller(ProfileController::class)->group(function () {

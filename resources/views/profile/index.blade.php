@@ -104,8 +104,16 @@
                                                     <label>Tgl Lahir <em class="text-danger">*</em></label>
                                                     <input type="text" name="tanggal_lahir"
                                                         class="form-control datepicker required"
-                                                        placeholder="Tanggal Lahir" id="tanggal_lahir" required
+                                                        placeholder="Tanggal Lahir" onkeyup="hitungumur()" id="tanggal_lahir" required
                                                         value="{{ $data->tanggal_lahir }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Umur <em class="text-danger">*</em></label>
+                                                    <input type="text" name="umur"
+                                                        class="form-control" readonly placeholder="Umur "
+                                                        id="yourage">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -199,6 +207,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label>Tanggal Terbit STR</label>
+                                                    <input type="text" name="tanggal_terbit_str" class="form-control datepicker"
+                                                        placeholder="Tanggal Terbit STR" id="tanggal_terbit_str" value="{{ $data->tanggal_terbit_str }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label>Masa Berlaku STR</label>
                                                     <input type="text" name="masa_berlaku_str" class="form-control datepicker"
                                                         placeholder="Masa Berlaku STR" id="masa_berlaku_str" value="{{ $data->masa_berlaku_str }}">
@@ -213,9 +228,16 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label>Tanggal Terbit SIP</label>
+                                                    <input type="text" name="tanggal_terbit_sip" class="form-control datepicker"
+                                                        placeholder="Tanggal Terbit SIP" id="tanggal_terbit_sip" value="{{ $data->tanggal_terbit_sip }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label>Masa Berlaku SIP</label>
                                                     <input type="text" name="masa_berlaku_sip" class="form-control datepicker"
-                                                        placeholder="masa_berlaku_sip" id="masa_berlaku_sip" value="{{ $data->masa_berlaku_sip }}">
+                                                        placeholder="Masa Berlaku SIP" id="masa_berlaku_sip" value="{{ $data->masa_berlaku_sip }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -232,6 +254,26 @@
                                                     <input type="text" name="no_bpjs_tk" class="form-control"
                                                         placeholder="Nomor BPJS Ketenagakerjaan" id="no_bpjs_tk"
                                                         value="{{ $data->no_bpjs_tk }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nomor Rekening BSI Pribadi <em class="text-danger">*</em></label>
+                                                    <input type="text" name="no_rek_bsi" class="form-control required"
+                                                        placeholder="Nomor Rekening BSI" id="no_rek_bsi"
+                                                        value="{{ $data->no_rek_bsi }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Pernah Terpapar Covid <em class="text-danger">*</em></label>
+                                                    <select name="covid" id="covid" class="form-control required">
+                                                        <option value="">Pilih</option>
+                                                        <option @if ($data->covid == 'Ya') selected @endif
+                                                            value="Ya">Ya</option>
+                                                        <option @if ($data->covid == 'Tidak') selected @endif
+                                                            value="Tidak">Tidak</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -295,6 +337,21 @@
                                                         <input type="text" name="nama_kontak_darurat" class="form-control required3"
                                                             placeholder="Nama Kontak Darurat" id="nama_kontak_darurat"
                                                             value="{{ $data->nama_kontak_darurat }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Hubungan Dengan Kontak Darurat</label>
+                                                        <select name="hubungan_kontak_darurat" id="hubungan_kontak_darurat" class="form-control">
+                                                            <option @if ($data->hubungan_kontak_darurat == 'Orang Tua') selected @endif
+                                                                value="Orang Tua">Orang Tua</option>
+                                                            <option @if ($data->hubungan_kontak_darurat == 'Suami/Istri') selected @endif
+                                                                value="Suami/Istri">Suami/Istri</option>
+                                                            <option @if ($data->hubungan_kontak_darurat == 'Saudara') selected @endif
+                                                                value="Saudara">Saudara</option>
+                                                            <option @if ($data->hubungan_kontak_darurat == 'Lainnya') selected @endif
+                                                                value="Lainnya">Lainnya</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -508,9 +565,16 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Tahun Lulus</label>
-                                                        <input type="text" name="tahun_lulus" class="form-control required2"
-                                                            placeholder="Tahun Lulus" id="tahun_lulus">
+                                                        <label>Tanggal Lulus</label>
+                                                        <input type="text" name="tanggal_lulus" class="form-control datepicker required2"
+                                                            placeholder="tanggal Lulus" id="tanggal_lulus">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Nomor Ijazah</label>
+                                                        <input type="text" name="nomor_ijazah" class="form-control required2"
+                                                            placeholder="Nomor Ijazah" id="nomor_ijazah">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -520,6 +584,8 @@
                                                             placeholder="Jurusan/Fakultas" id="jurusan">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <button type="reset" class="btn btn-danger w-100 mb-2"
                                                         onclick="$('#form-pendidikan').hide();">Reset & Sembunyikan</button>
@@ -622,6 +688,13 @@
                                                         <label>Penyelenggara</label>
                                                         <input type="text" name="penyelenggara" class="form-control required6"
                                                         placeholder="Penyelenggara" id="penyelenggara">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Jumlah Jam Pelajaran</label>
+                                                        <input type="text" name="jam_pelajaran" class="form-control required6"
+                                                        placeholder="Jumlah Jam Pelajaran" id="jam_pelajaran">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1116,6 +1189,14 @@
                 document.getElementById("kota").disabled = false;
                 document.getElementById("kelurahan").disabled = false;
             }
+        }
+        hitungumur();
+        function hitungumur(){
+            var tgl1=new Date(document.getElementById("tanggal_lahir").value);
+            var tgl2=new Date(); 
+            var timeDiff = Math.abs(tgl2.getTime() - tgl1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+            document.getElementById("yourage").value = Math.round(diffDays/365) + " Tahun";
         }
     </script>
 @endsection

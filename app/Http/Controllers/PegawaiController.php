@@ -49,13 +49,14 @@ class PegawaiController extends Controller
         // $bagian = DB::table('bagian')->get();
         $jenis_pendidikan = DB::table('jenis_pendidikan')->whereNull('jenis_pendidikan.deleted_at')->get();
         $struktur = DB::table('struktur')->whereNull('struktur.deleted_at')->get();
+        $grup_kepegawaian = DB::table('grup_kepegawaian')->whereNull('grup_kepegawaian.deleted_at')->get();
         $jenis_pelatihan = DB::table('jenis_pelatihan')->whereNull('jenis_pelatihan.deleted_at')->get();
         $keluarga_pegawai = DB::table('keluarga_pegawai')->where('pegawai_id', $id)->get();
         $pendidikan_pegawai = DB::table('pendidikan_pegawai')->leftJoin('jenis_pendidikan', 'jenis_pendidikan.jenis_pendidikan_id', '=', 'pendidikan_pegawai.jenis_pendidikan_id')->where('pegawai_id', $id)->get();
         // $provinsi = DB::table('pegawai_detail')->distinct()->get(['provinsi']);
         // $kabupaten = DB::table('pegawai_detail')->distinct()->get(['kabupaten']);
         // $data = DB::select("SELECT * FROM pegawai WHERE pegawai_id='$id'");
-        return view('pegawai.edit', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan','jenis_pelatihan','struktur'));
+        return view('pegawai.edit', compact('data', 'keluarga_pegawai','pendidikan_pegawai','jenis_pendidikan','jenis_pelatihan','struktur','grup_kepegawaian'));
     }
 
     public function add()
@@ -125,7 +126,8 @@ class PegawaiController extends Controller
             'created_at' => now(),
             'jenis_pendidikan_id' => $request->jenis_pendidikan,
             'nama_sekolah' => $request->nama_sekolah,
-            'tahun_lulus' => $request->tahun_lulus,
+            'tanggal_lulus' => $request->tanggal_lulus,
+            'nomor_ijazah' => $request->nomor_ijazah,
             'jurusan' => $request->jurusan,
             'pegawai_id' => $pegawai_id,
         ];
@@ -165,6 +167,8 @@ class PegawaiController extends Controller
                 'nama_pelatihan' => $request->nama_pelatihan,
                 'tanggal_pelatihan' => $request->tanggal_pelatihan,
                 'penyelenggara' => $request->penyelenggara,
+                'jam_pelajaran' => $request->jam_pelajaran,
+                'grup_kepegawaian_id' => $request->grup_kepegawaian_id,
                 'bukti_pelatihan' => $bukti_pelatihan,
                 'pegawai_id' => $pegawai_id,
             ];
@@ -193,13 +197,19 @@ class PegawaiController extends Controller
             'npwp' => $request->npwp,
             'str' => $request->str,
             'masa_berlaku_str' => $request->masa_berlaku_str,
+            'tanggal_terbit_str' => $request->tanggal_terbit_str,
             'sip' => $request->sip,
             'masa_berlaku_sip' => $request->masa_berlaku_sip,
+            'tanggal_terbit_sip' => $request->tanggal_terbit_sip,
             'no_bpjs_kes' => $request->no_bpjs_kes,
             'no_bpjs_tk' => $request->no_bpjs_tk,
             'no_mr' => $request->no_mr,
             'email' => $request->email,
+            'no_rek_bsi' => $request->no_rek_bsi,
+            'covid' => $request->covid,
+            'tanggal_masuk' => $request->tanggal_masuk,
             'struktur_id' => $request->struktur_id,
+            'grup_kepegawaian_id' => $request->grup_kepegawaian_id,
         ];
         // dd($data);
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
@@ -234,6 +244,7 @@ class PegawaiController extends Controller
             'telp_keluarga' => $request->telp_keluarga,
             'nomor_kontak_darurat' => $request->nomor_kontak_darurat,
             'nama_kontak_darurat' => $request->nama_kontak_darurat,
+            'hubungan_kontak_darurat' => $request->hubungan_kontak_darurat,
             'alamat_ktp' => $request->alamat_ktp,
             'provinsi_ktp' => $request->provinsi_ktp,
             'kota_ktp' => $request->kota_ktp,

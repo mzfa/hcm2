@@ -7,7 +7,8 @@
         <th scope="col">#</th>
         <th scope="col">Jenis Pendidikan</th>
         <th scope="col">Nama Sekolah/Instansi</th>
-        <th scope="col">Tahun Lulus</th>
+        <th scope="col">Tanggal Lulus</th>
+        <th scope="col">Nomor Ijazah</th>
         <th scope="col">#</th>
     </tr>
     </thead>
@@ -17,7 +18,8 @@
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $pend->nama_pendidikan }}</td>
             <td>{{ $pend->nama_sekolah }}</td>
-            <td>{{ $pend->tahun_lulus }}</td>
+            <td>{{ $pend->tanggal_lulus }}</td>
+            <td>{{ $pend->nomor_ijazah }}</td>
             <td>
                 <span class="badge badge-danger" onclick="hapuspendidikan('{{ Crypt::encrypt($pend->pendidikan_pegawai_id) }}')">Hapus</span>
             </td>

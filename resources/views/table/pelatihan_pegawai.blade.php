@@ -8,6 +8,7 @@
         <th scope="col">Bukti Pelatihan</th>
         <th scope="col">Nama Pelatihan</th>
         <th scope="col">Penyelenggara</th>
+        <th scope="col">Jumlah Jam Pelajaran</th>
         <th scope="col">Tanggal Pelatihan</th>
         <th scope="col">#</th>
     </tr>
@@ -19,6 +20,7 @@
             <td><a href="{{ url('document/pelatihan/'.$kel->bukti_pelatihan) }}" target="_blank" rel="noopener noreferrer">Lihat Bukti</a></td>
             <td>{{ $kel->nama_pelatihan }}</td>
             <td>{{ $kel->penyelenggara }}</td>
+            <td>{{ $kel->jam_pelajaran }}</td>
             <td>{{ $kel->tanggal_pelatihan }}</td>
             <td>
                 <span class="badge badge-danger" onclick="hapuspelatihan('{{ Crypt::encrypt($kel->pelatihan_pegawai_id) }}')">Hapus</span>
