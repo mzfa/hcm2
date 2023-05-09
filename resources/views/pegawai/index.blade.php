@@ -47,7 +47,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 {{ $pegawai->nama_pegawai }}
-                                                @if(is_null($pegawai->tanggal_lahir) && is_null($pegawai->status_kawin) && is_null($pegawai->alamat) && is_null($pegawai->telp_pribadi) && is_null($pegawai->kelurahan))
+                                                @if(is_null($pegawai->tanggal_lahir) && is_null($pegawai->status_kawin) && is_null($pegawai->alamat) && is_null($pegawai->telp_pribadi) && is_null($pegawai->kecamatan))
                                                     <span class="badge badge-danger">Belum Lengkap</span>
                                                 @endif
                                             </td>
