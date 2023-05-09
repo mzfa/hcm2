@@ -227,13 +227,13 @@ class PegawaiController extends Controller
         $alamat = $request->alamat;
         $provinsi = $request->provinsi;
         $kota = $request->kota;
-        $kelurahan = $request->kelurahan;
+        $kecamatan = $request->kecamatan;
 
         if(isset($request->check_alamat)){
             $alamat = $request->alamat_ktp;
             $provinsi = $request->provinsi_ktp;
             $kota = $request->kota_ktp;
-            $kelurahan = $request->kelurahan_ktp;
+            $kecamatan = $request->kecamatan_ktp;
         }
 
 
@@ -248,11 +248,11 @@ class PegawaiController extends Controller
             'alamat_ktp' => $request->alamat_ktp,
             'provinsi_ktp' => $request->provinsi_ktp,
             'kota_ktp' => $request->kota_ktp,
-            'kelurahan_ktp' => $request->kelurahan_ktp,
+            'kecamatan_ktp' => $request->kecamatan_ktp,
             'alamat' => $alamat,
             'provinsi' => $provinsi,
             'kota' => $kota,
-            'kelurahan' => $kelurahan,
+            'kecamatan' => $kecamatan,
         ];
         // dd($data);
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);

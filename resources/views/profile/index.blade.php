@@ -384,10 +384,10 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Kelurahan</label>
-                                                        <input type="text" name="kelurahan_ktp" class="form-control required3"
-                                                            placeholder="Kelurahan" id="kelurahan_ktp"
-                                                            value="{{ $data->kelurahan_ktp }}">
+                                                        <label>Kecamatan</label>
+                                                        <input type="text" name="kecamatan_ktp" class="form-control required3"
+                                                            placeholder="kecamatan" id="kecamatan_ktp"
+                                                            value="{{ $data->kecamatan_ktp }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -426,10 +426,10 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Kelurahan</label>
-                                                        <input type="text" name="kelurahan" class="form-control"
-                                                            placeholder="Kelurahan" id="kelurahan"
-                                                            value="{{ $data->kelurahan }}">
+                                                        <label>Kecamatan</label>
+                                                        <input type="text" name="kecamatan" class="form-control"
+                                                            placeholder="kecamatan" id="kecamatan"
+                                                            value="{{ $data->kecamatan }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1182,12 +1182,12 @@
                 document.getElementById("alamat").disabled = true;
                 document.getElementById("provinsi").disabled = true;
                 document.getElementById("kota").disabled = true;
-                document.getElementById("kelurahan").disabled = true;
+                document.getElementById("kecamatan").disabled = true;
             } else {
                 document.getElementById("alamat").disabled = false;
                 document.getElementById("provinsi").disabled = false;
                 document.getElementById("kota").disabled = false;
-                document.getElementById("kelurahan").disabled = false;
+                document.getElementById("kecamatan").disabled = false;
             }
         }
         hitungumur();
