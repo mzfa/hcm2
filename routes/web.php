@@ -14,12 +14,15 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\JenisPendidikanController;
 use App\Http\Controllers\JenisKompetensiController;
 use App\Http\Controllers\PendidikanController;
+use App\Http\Controllers\PenggajianManualController;
 use App\Http\Controllers\JenisPelatihanController;
 use App\Http\Controllers\GrupKepegawaianController;
 use App\Http\Controllers\KompetensiController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\JenisCutiController;
+use App\Http\Controllers\GajiController;
+use App\Http\Controllers\SlipGajiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,7 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->n
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login.store');
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'store'])->name('register.store');
+Route::get('/cetak', [\App\Http\Controllers\PenggajianManualController::class, 'createPDF'])->name('createPDF');
 Route::post('/logout', function () {
     auth()->logout();
     request()->session()->invalidate();
@@ -49,6 +53,11 @@ Route::post('/logout', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // route::group()->middleware();
+    
+    Route::controller(GajiController::class)->group(function () {
+        Route::get('/gaji', 'index')->name('gaji.index');
+        Route::get('/gaji/detail/{id}', 'detail');
+    });
     Route::controller(HakAksesController::class)->middleware('cek_login:hakakses.index')->group(function () {
         Route::get('/hakakses', 'index')->name('hakakses.index');
         Route::get('/hakakses/edit/{id}', 'edit');
@@ -202,6 +211,20 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pendidikan/update', 'update');
         Route::get('/pendidikan/edit/{id}', 'edit');
         Route::get('/pendidikan/delete/{id}', 'delete');
+    });
+    Route::controller(PenggajianManualController::class)->middleware('cek_login:penggajian_manual.index')->group(function () {
+        // Route::get('file-import-export', [UserController::class, 'fileImportExport']);
+        // Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
+        Route::get('/penggajian_manual', 'index')->name('penggajian_manual.index');
+        Route::post('/penggajian_manual/import', 'import');
+        Route::get('/penggajian_manual/detail/{id}', 'detail');
+    });
+    Route::controller(SlipGajiController::class)->group(function () {
+        Route::get('/slip_gaji', 'index');
+        Route::get('/slip_gaji/detail/{id}', 'detail');
+        Route::post('/slip_gaji/store', 'store');
+        Route::post('/slip_gaji/update', 'update');
+        Route::get('/slip_gaji/delete/{id}', 'delete');
     });
 
 

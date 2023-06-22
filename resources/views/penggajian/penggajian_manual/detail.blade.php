@@ -1,0 +1,253 @@
+@extends('layouts.app')
+
+@section('content')
+
+<section class="section">
+    <div class="section-header">
+        <h1>Slip Gaji</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
+            <div class="breadcrumb-item">Slip Gaji</div>
+        </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Slip Gaji</h2>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card border border-info">
+                    <div class="card-header bg-info">
+                        <div class="col-md-2">
+                            <img src="{{ url(env('APP_LOGO_HCM')) }}" class="w-100">
+                        </div>
+                        <div class="col-md-10" style="font-weight: bold;font-size:100%">
+                            {{-- <table class="text-white" width="100%">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                </tr>
+                                <tr>
+                                    <th>NRp</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                    <th>Unit Kerja</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Kelas Jabaran</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                    <th>Golongan</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Periode</th>
+                                    <th>:</th>
+                                    <th>{{ 'zul' }}</th>
+                                </tr>
+                            </table> --}}
+                                <div class="row text-white fw-bold">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">Nama</div>
+                                            <div class="col-9">: {{ $data->nama }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-white fw-bold">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">NIP</div>
+                                            <div class="col-9">: {{ $data->nip }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">Unit Kerja</div>
+                                            <div class="col-9">: {{ $data->bagian }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-white fw-bold">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">Kelas Jabatan</div>
+                                            <div class="col-9">: {{ $data->kelas_jabatan }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">Pendidikan</div>
+                                            <div class="col-9">: {{ $data->pendidikan }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-white fw-bold">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3">Periode</div>
+                                            <div class="col-9">: {{ date('M Y', strtotime($data->periode_gaji)) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card border border-warning">
+                                    <div class="card-header bg-warning">
+                                        <h5 class="text-white">A. Jumlah Gaji</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>Gaji Pokok</td>
+                                                <th style="text-align: right">{{ number_format($data->gaji_pokok) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>IP</td>
+                                                <th style="text-align: right">{{ number_format($data->ip) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Tunjangan Jabatan</td>
+                                                <th style="text-align: right">{{ number_format($data->tunj_jabatan) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Tunjangan Penyesuaian</td>
+                                                <th style="text-align: right">{{ number_format($data->penyesuaian) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <th style="text-align: right">Rp. {{ number_format($data->total_gaji) }}</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card border border-success">
+                                    <div class="card-header bg-success">
+                                        <h5 class="text-white">B. Jumlah Remunerasi</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>Overtime</td>
+                                                <th style="text-align: right">{{ number_format($data->overtime) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Double Job</td>
+                                                <th style="text-align: right">{{ number_format($data->double_job) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Rapel</td>
+                                                <th style="text-align: right">{{ number_format($data->rapel) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>PPH 21 DTP</td>
+                                                <th style="text-align: right">{{ number_format($data->pph_21_dtp) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <th style="text-align: right">Rp. {{ number_format($data->overtime + $data->double_job + $data->rapel + $data->pph_21_dtp) }}</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border border-danger">
+                                    <div class="card-header bg-danger">
+                                        <h5 class="text-white">C. Jumlah Potongan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>BPJS TK</td>
+                                                <th style="text-align: right">{{ number_format($data->bpjs_tk) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>BPJS Kesehatan</td>
+                                                <th style="text-align: right">{{ number_format($data->bpjs_kesehatan) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>PPH 21</td>
+                                                <th style="text-align: right">{{ number_format($data->pph_21) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Potongan Obat</td>
+                                                <th style="text-align: right">{{ number_format($data->pemotongan_obat) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Lain-lain</td>
+                                                <th style="text-align: right">{{ number_format($data->lain_lain) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Parkir</td>
+                                                <th style="text-align: right">{{ number_format($data->parkir) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Pinjaman</td>
+                                                <th style="text-align: right">{{ number_format($data->pinjaman) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Kesejahteraan Karyawan</td>
+                                                <th style="text-align: right">{{ number_format($data->pph_21_dtp) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Potongan Absensi</td>
+                                                <th style="text-align: right">{{ number_format($data->potongan_absensi) }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <th style="text-align: right">Rp. {{ number_format($data->total_pengurang) }}</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card border border-primary">
+                                    <div class="card-header bg-primary">
+                                        <h5 class="text-white">D. Jumlah Terima</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <table width="100%">
+                                            <tr>
+                                                <th><h6 class="text-center">JUMLAH GAJI + JUMLAH NUMERASI - JUMLAH POTONGAN</h6></th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <th><center><h5 class="text-center ">Rp. {{ number_format($data->gaji_bersih) }}</h5></center></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@endsection
+
+@section('scripts')
+<script>
+</script>
+
+@endsection

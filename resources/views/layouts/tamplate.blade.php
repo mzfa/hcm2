@@ -83,7 +83,7 @@
   <script src="{{ url('assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
   <!-- Template JS File -->
-  <script src="{{ url('assets/js/scripts.js') }}"></script>
+  <script src="{{ url('assets/js/scripts2.js') }}"></script>
   {{-- <script src="{{ url('assets/js/custom.js') }}"></script> --}}
   
 
