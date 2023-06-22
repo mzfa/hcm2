@@ -15,6 +15,9 @@
             <li>
                 <a class="nav-link" href="{{ url('/profile') }}"><i class="fas fa-user"></i> <span>Profil</span></a>
             </li>
+            <li>
+                <a class="nav-link" href="{{ url('/slip_gaji') }}"><i class="fas fa-user"></i> <span>Slip Gaji</span></a>
+            </li>
             @endif
             @php
                 $sidebar = Session('menu');

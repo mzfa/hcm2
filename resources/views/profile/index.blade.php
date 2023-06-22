@@ -3,20 +3,20 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Edit Pegawai</h1>
+            <h1>Biodata Diri</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
-                <div class="breadcrumb-item">Edit Pegawai</div>
+                <div class="breadcrumb-item">Biodata Diri</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Tambah Pegawai</h2>
+            <h2 class="section-title">Biodata Diri</h2>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tambah Pegawai</h4>
+                            <h4>Biodata Diri &nbsp; <a href="" class="btn btn-primary">Cetak CV</a></h4>
                         </div>
                         <div class="card-body">
                             <div class="mt-4">
