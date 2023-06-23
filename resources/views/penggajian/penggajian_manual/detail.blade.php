@@ -17,11 +17,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card border border-info">
-                    <div class="card-header bg-info">
+                    <div class="card-header bg-info p-1">
                         <div class="col-md-2">
                             <img src="{{ url(env('APP_LOGO_HCM')) }}" class="w-100">
                         </div>
-                        <div class="col-md-10" style="font-weight: bold;font-size:100%">
+                        <div class="col-md-10" style="font-weight: bold;font-size:100%padding:0 !important;">
                             {{-- <table class="text-white" width="100%">
                                 <tr>
                                     <th>Nama</th>
@@ -53,7 +53,7 @@
                                 <div class="row text-white fw-bold">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">Nama</div>
+                                            <div class="col-3 p-0">Nama</div>
                                             <div class="col-9">: {{ $data->nama }}</div>
                                         </div>
                                     </div>
@@ -61,13 +61,13 @@
                                 <div class="row text-white fw-bold">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">NIP</div>
+                                            <div class="col-3 p-0">NIP</div>
                                             <div class="col-9">: {{ $data->nip }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">Unit Kerja</div>
+                                            <div class="col-3 p-0">Unit Kerja</div>
                                             <div class="col-9">: {{ $data->bagian }}</div>
                                         </div>
                                     </div>
@@ -75,13 +75,13 @@
                                 <div class="row text-white fw-bold">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">Kelas Jabatan</div>
+                                            <div class="col-3 p-0">Kelas Jabatan</div>
                                             <div class="col-9">: {{ $data->kelas_jabatan }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">Pendidikan</div>
+                                            <div class="col-3 p-0">Pendidikan</div>
                                             <div class="col-9">: {{ $data->pendidikan }}</div>
                                         </div>
                                     </div>
@@ -89,8 +89,14 @@
                                 <div class="row text-white fw-bold">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3">Periode</div>
+                                            <div class="col-3 p-0">Periode</div>
                                             <div class="col-9">: {{ $data->periode_gaji }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-3 p-0">Status</div>
+                                            <div class="col-9">: {{ $data->status_kepegawaian_manual }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -127,8 +133,8 @@
                                                 <td colspan="3"><hr></td>
                                             </tr>
                                             <tr>
-                                                <td>&nbsp;</td>
-                                                <th style="text-align: right">Rp. {{ number_format($data->total_gaji) }}</th>
+                                                {{-- <td>&nbsp;</td> --}}
+                                                <th style="text-align: right" colspan="3">Rp. {{ number_format($data->total_gaji) }}</th>
                                             </tr>
                                         </table>
                                     </div>
@@ -161,8 +167,8 @@
                                                 <td colspan="3"><hr></td>
                                             </tr>
                                             <tr>
-                                                <td>&nbsp;</td>
-                                                <th style="text-align: right">Rp. {{ number_format($data->overtime + $data->double_job + $data->rapel + $data->pph_21_dtp) }}</th>
+                                                {{-- <td>&nbsp;</td> --}}
+                                                <th style="text-align: right" colspan="3">Rp. {{ number_format($data->overtime + $data->double_job + $data->rapel + $data->pph_21_dtp) }}</th>
                                             </tr>
                                         </table>
                                     </div>
@@ -215,8 +221,8 @@
                                                 <td colspan="3"><hr></td>
                                             </tr>
                                             <tr>
-                                                <td>&nbsp;</td>
-                                                <th style="text-align: right">Rp. {{ number_format($data->total_pengurang) }}</th>
+                                                {{-- <td>&nbsp;</td> --}}
+                                                <th style="text-align: right" colspan="3">Rp. {{ number_format($data->total_pengurang) }}</th>
                                             </tr>
                                         </table>
                                     </div>
