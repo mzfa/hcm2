@@ -83,7 +83,7 @@
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-12 col-form-label">Periode</label>
                         <div class="col-sm-12">
-                        <input type="text" class="form-control" id="periode" name="periode" required>
+                        <input type="month" class="form-control" id="periode" name="periode" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -131,6 +131,11 @@
 
 @section('scripts')
 <script>
+    $("#datepicker").datepicker( {
+        format: "mm-yyyy",
+        viewMode: "months", 
+        minViewMode: "months"
+    });
     function edit(id){
         // let filter = $(this).attr('id'); 
         // filter = filter.split("-");

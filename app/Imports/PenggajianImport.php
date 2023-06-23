@@ -57,6 +57,7 @@ class PenggajianImport implements ToCollection
                     'potongan_absensi' => $item[41],
                     'total_pengurang' => $item[44],
                     'gaji_bersih' => $item[45],
+                    'status_kepegawaian_manual' => $item[51],
                     // 'periode_gaji' => $item[30],
                     'periode_gaji' => $this->data['periode'],
                 ];

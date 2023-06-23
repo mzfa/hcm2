@@ -23,11 +23,12 @@ class PenggajianManualController extends Controller
         return view('penggajian.penggajian_manual.index', compact('penggajian_manual'));
     }
     public function import(Request $request){
+        // dd(str_replace("-",'', $request->periode));
         $data = [
-            'periode' => $request->periode,
+            'periode' => str_replace("-",'', $request->periode),
         ];
         Excel::import(new PenggajianImport($data), $request->file('file')->store('temp'));
-        // return back();
+        return back();
     }
 
     public function store(Request $request){

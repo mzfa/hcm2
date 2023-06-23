@@ -90,7 +90,7 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-3">Periode</div>
-                                            <div class="col-9">: {{ date('M Y', strtotime($data->periode_gaji)) }}</div>
+                                            <div class="col-9">: {{ $data->periode_gaji }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                             <div class="col-md-6">
                                 <div class="card border border-warning">
                                     <div class="card-header bg-warning">
-                                        <h5 class="text-white">A. Jumlah Gaji</h5>
+                                        <h5 class="text-white">A. Pendapatan Tetap</h5>
                                     </div>
                                     <div class="card-body">
                                         <table width="100%">
@@ -117,10 +117,12 @@
                                                 <td>Tunjangan Jabatan</td>
                                                 <th style="text-align: right">{{ number_format($data->tunj_jabatan) }}</th>
                                             </tr>
+                                            @if($data->penyesuaian !== '0' && $data->penyesuaian !== null)
                                             <tr>
                                                 <td>Tunjangan Penyesuaian</td>
                                                 <th style="text-align: right">{{ number_format($data->penyesuaian) }}</th>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td colspan="3"><hr></td>
                                             </tr>
@@ -133,7 +135,7 @@
                                 </div>
                                 <div class="card border border-success">
                                     <div class="card-header bg-success">
-                                        <h5 class="text-white">B. Jumlah Remunerasi</h5>
+                                        <h5 class="text-white">B. Pendapatan Tidak Tetap</h5>
                                     </div>
                                     <div class="card-body">
                                         <table width="100%">
@@ -149,10 +151,12 @@
                                                 <td>Rapel</td>
                                                 <th style="text-align: right">{{ number_format($data->rapel) }}</th>
                                             </tr>
+                                            @if($data->pph_21_dtp !== '0' && $data->pph_21_dtp !== null)
                                             <tr>
                                                 <td>PPH 21 DTP</td>
                                                 <th style="text-align: right">{{ number_format($data->pph_21_dtp) }}</th>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td colspan="3"><hr></td>
                                             </tr>
@@ -224,7 +228,7 @@
                                     <div class="card-body">
                                         <table width="100%">
                                             <tr>
-                                                <th><h6 class="text-center">JUMLAH GAJI + JUMLAH NUMERASI - JUMLAH POTONGAN</h6></th>
+                                                <th><h6 class="text-center">PENDAPATAN TETAP + PENDAPATAN TIDAK TETAP - JUMLAH POTONGAN</h6></th>
                                             </tr>
                                             <tr>
                                                 <td colspan="3"><hr></td>
