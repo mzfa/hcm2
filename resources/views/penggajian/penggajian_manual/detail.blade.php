@@ -75,7 +75,7 @@
                                 <div class="row text-white fw-bold">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-3 p-0">Kelas Jabatan</div>
+                                            <div class="col-3 p-0">Jabatan</div>
                                             <div class="col-9">: {{ $data->kelas_jabatan }}</div>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Kesejahteraan Karyawan</td>
-                                                <th style="text-align: right">{{ number_format($data->pph_21_dtp) }}</th>
+                                                <th style="text-align: right">{{ number_format($data->kesra) }}</th>
                                             </tr>
                                             <tr>
                                                 <td>Potongan Absensi</td>
