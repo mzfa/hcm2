@@ -20,9 +20,9 @@
                     <div class="card-header">
                         <h4>Slip Gaji</h4>
                         <div class="col-auto">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-plus"></i> Tambah
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <div class="card-body">
