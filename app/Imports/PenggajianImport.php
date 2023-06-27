@@ -23,7 +23,7 @@ class PenggajianImport implements ToCollection
     {
         DB::table('penggajian')->where(['periode_gaji' => $this->data['periode']])->delete();
         foreach($collection as $item){
-            if($item[0] !== 'NO'){
+            if($item[0] != 'NO' && $item[6] != 'nama'){
                 $data_import = [
                     'created_by' => Auth::user()->id,
                     'created_at' => now(),

@@ -13,7 +13,13 @@
 
     <div class="section-body">
         <h2 class="section-title">Slip Gaji</h2>
-
+        @php
+            $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
+            // dd($bulan[01]);
+            $bulan_periode = substr($data->periode_gaji, -2);
+            $bulan_fix = $bulan[$bulan_periode];
+            $periode_gajian = $bulan_fix." ". substr($data->periode_gaji,0, 4);
+        @endphp
         <div class="row">
             <div class="col-12">
                 <div class="card border border-info">
@@ -90,7 +96,7 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-3 p-0">Periode</div>
-                                            <div class="col-9">: {{ $data->periode_gaji }}</div>
+                                            <div class="col-9">: {{ $periode_gajian }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
