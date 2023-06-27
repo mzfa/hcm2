@@ -39,6 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nama Lengkap</th>
+                                        <th>Periode</th>
                                         <th>NPWP - Norek</th>
                                         <th>Bagian</th>
                                         <th>#</th>
@@ -46,8 +47,16 @@
                                 </thead>
                                 <tbody>
                                     @foreach($penggajian_manual as $item)
+                                        @php
+                                            $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
+                                            // dd($bulan[01]);
+                                            $bulan_periode = substr($item->periode_gaji, -2);
+                                            $bulan_fix = $bulan[$bulan_periode];
+                                            $periode_gajian = $bulan_fix." ". substr($item->periode_gaji,0, 4);
+                                        @endphp
                                         <tr>
                                             <td>{{ $item->nama }}</td>
+                                            <td>{{ $periode_gajian }}</td>
                                             <td>{{ $item->npwp .' - '. $item->no_rek }}</td>
                                             <td>{{ $item->bagian  }}</td>
                                             <td>
