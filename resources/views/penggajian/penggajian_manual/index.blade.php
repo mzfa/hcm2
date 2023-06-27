@@ -74,7 +74,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data <a href="{{ url('FORMAT IMPORT DATA.xlsx') }}" class="btn btn-warning">Download Tamplate</a></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

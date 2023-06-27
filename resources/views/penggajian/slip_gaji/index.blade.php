@@ -39,8 +39,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data as $item)
+                                        @php
+                                            $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
+                                            // dd($bulan[01]);
+                                            $bulan_periode = substr($item->periode_gaji, -2);
+                                            $bulan_fix = $bulan[$bulan_periode];
+
+                                        @endphp
                                         <tr>
-                                            <td>{{ $item->periode_gaji }}</td>
+                                            <td>{{ $bulan_fix }} {{ substr($item->periode_gaji,0, 4) }}</td>
                                             <td>{{ $item->bagian }}</td>
                                             <td>{{ $item->pendidikan }}</td>
                                             <td>Rp. {{ number_format($item->gaji_bersih) }}</td>
