@@ -67,17 +67,17 @@ $(function() {
   // }
   // sidebar_sticky();
 
-  // var sidebar_nicescroll;
-  // var update_sidebar_nicescroll = function() {
-  //   let a = setInterval(function() {
-  //     if(sidebar_nicescroll != null)
-  //       sidebar_nicescroll.resize();
-  //   }, 10);
+  var sidebar_nicescroll;
+  var update_sidebar_nicescroll = function() {
+    let a = setInterval(function() {
+      if(sidebar_nicescroll != null)
+        sidebar_nicescroll.resize();
+    }, 10);
 
-  //   setTimeout(function() {
-  //     clearInterval(a);
-  //   }, 600);
-  // }
+    setTimeout(function() {
+      clearInterval(a);
+    }, 600);
+  }
 
   // var sidebar_dropdown = function() {
   //   if($(".main-sidebar").length) {
