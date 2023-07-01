@@ -56,7 +56,10 @@
                                             <td>{{ $pegawai->nama_profesi }}</td>
                                             <td>{{ $pegawai->nama_struktur }}</td>
                                             {{-- <td><a onclick="return edit({{ $pegawai->pegawai_id }})" class="btn text-white btn-info">Edit</a></td> --}}
-                                            <td><a href="{{ url('pegawai/edit/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-info">Edit</a></td>
+                                            <td>
+                                                <a href="{{ url('pegawai/edit/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-info">Edit</a>
+                                                <a onclick="return confirm('Apakah anda Yakin ingin menghapus ini?')" href="{{ url('pegawai/hapus_pegawai/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-danger">Hapus</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

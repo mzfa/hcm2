@@ -22,7 +22,9 @@ use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\JenisCutiController;
 use App\Http\Controllers\GajiController;
+use App\Http\Controllers\JasaMedisController;
 use App\Http\Controllers\SlipGajiController;
+use App\Http\Controllers\SlipJasaMedisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pegawai/table_pendidikan/{id}', 'table_pendidikan');
         Route::get('/pegawai/table_riwayat_pekerjaan/{id}', 'table_riwayat_pekerjaan');
         Route::get('/pegawai/table_pelatihan/{id}', 'table_pelatihan');
+        Route::get('/pegawai/hapus_pegawai/{id}', 'hapus_pegawai');
         Route::post('/pegawai/update', 'update');
     });
     Route::controller(JenisPendidikanController::class)->middleware('cek_login:jenis_pendidikan.index')->group(function () {
@@ -219,12 +222,28 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/penggajian_manual/import', 'import');
         Route::get('/penggajian_manual/detail/{id}', 'detail');
     });
+    Route::controller(JasaMedisController::class)->middleware('cek_login:jasa_medis.index')->group(function () {
+        // Route::get('file-import-export', [UserController::class, 'fileImportExport']);
+        // Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
+        Route::get('/jasa_medis', 'index')->name('jasa_medis.index');
+        Route::post('/jasa_medis/import', 'import');
+        Route::post('/jasa_medis/store', 'store');
+        Route::get('/jasa_medis/add', 'add');
+        Route::get('/jasa_medis/detail/{id}', 'detail');
+    });
     Route::controller(SlipGajiController::class)->group(function () {
         Route::get('/slip_gaji', 'index');
         Route::get('/slip_gaji/detail/{id}', 'detail');
         Route::post('/slip_gaji/store', 'store');
         Route::post('/slip_gaji/update', 'update');
         Route::get('/slip_gaji/delete/{id}', 'delete');
+    });
+    Route::controller(SlipJasaMedisController::class)->group(function () {
+        Route::get('/slip_jasa_medis', 'index');
+        Route::get('/slip_jasa_medis/detail/{id}', 'detail');
+        Route::post('/slip_jasa_medis/store', 'store');
+        Route::post('/slip_jasa_medis/update', 'update');
+        Route::get('/slip_jasa_medis/delete/{id}', 'delete');
     });
 
 

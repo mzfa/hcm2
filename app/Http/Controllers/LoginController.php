@@ -75,10 +75,13 @@ class LoginController extends Controller
                 }
                 
                 // dd($data_hakakses);
-                $user_data = DB::table('pegawai_detail')->where(['pegawai_id' => $check_password->pegawai_id])->get();
+                $user_data = DB::table('pegawai')->where(['pegawai_id' => $check_password->pegawai_id])->first();
                 $image = "";
-                if(isset($user_data[0]->foto_profile))
-                    $image = asset('images/profile/'.$user_data[0]->foto_profile);
+                if(isset($user_data)){
+                    // dd($user_data);
+                    $image = asset('images/profile/'.$user_data->foto);
+                    session(['profesi_id' => $user_data->profesi_id]); 
+                }
                 session(['menu' => $menu]);
                 session(['foto_profile' => $image]);
                 Auth::loginUsingId($check_password->id, true);

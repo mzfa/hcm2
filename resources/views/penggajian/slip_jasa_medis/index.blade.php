@@ -4,65 +4,55 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>Penggajian</h1>
+        <h1>Slip Jasa Medis</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
-            <div class="breadcrumb-item">Penggajian</div>
+            <div class="breadcrumb-item">Slip Jasa Medis</div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">Penggajian</h2>
+        <h2 class="section-title">Slip Jasa Medis</h2>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Penggajian</h4>
+                        <h4>Slip Jasa Medis</h4>
                         <div class="col-auto">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-plus"></i> Tambah
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @foreach ($errors->all() as $error)
-                                <strong>{{$error}} <br></strong> 
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
-                                        <th>Nama Lengkap</th>
                                         <th>Periode</th>
-                                        <th>NPWP - Norek</th>
                                         <th>Bagian</th>
+                                        {{-- <th>Pendidikan</th> --}}
+                                        {{-- <th>Gaji Bersih</th> --}}
                                         <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($penggajian_manual as $item)
+                                    @foreach($data as $item)
                                         @php
                                             $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
                                             // dd($bulan[01]);
-                                            $bulan_periode = substr($item->periode_gaji, -2);
+                                            $bulan_periode = substr($item->periode_pembayaran, -2);
                                             $bulan_fix = $bulan[$bulan_periode];
-                                            $periode_gajian = $bulan_fix." ". substr($item->periode_gaji,0, 4);
+
                                         @endphp
                                         <tr>
-                                            <td>{{ $item->nama }}</td>
-                                            <td>{{ $periode_gajian }}</td>
-                                            <td>{{ $item->npwp .' - '. $item->no_rek }}</td>
-                                            <td>{{ $item->bagian  }}</td>
+                                            <td>{{ $bulan_fix }} {{ substr($item->periode_pembayaran,0, 4) }}</td>
+                                            <td>{{ $item->nama_bagian }}</td>
+                                            {{-- <td>{{ $item->pendidikan }}</td> --}}
+                                            {{-- <td>Rp. {{ number_format($item->gaji_bersih) }}</td> --}}
                                             <td>
-                                                <a onclick="return edit({{ $item->penggajian_id }})" class="btn text-white btn-info">Edit</a>
-                                                <a href="{{ url('penggajian_manual/detail/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-warning">Detail</a>
-                                                <a href="{{ url('penggajian_manual/delete/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-danger">Hapus</a>
+                                                <a target="_blank" href="{{ url('document/jasa_medis/'.$item->pegawai_id.'/'.$item->file_bukti) }}" class="btn text-white btn-warning">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -79,26 +69,20 @@
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ url('penggajian_manual/import') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('jenis_kompetensi/store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data <a href="{{ url('FORMAT IMPORT DATA.xlsx') }}" class="btn btn-warning">Download Tamplate</a></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-12 col-form-label">Periode</label>
-                        <div class="col-sm-12">
-                        <input type="month" class="form-control" id="periode" name="periode" required>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-12 col-form-label">File Import</label>
-                        <div class="col-sm-12">
-                        <input type="file" class="form-control" id="file" name="file" required>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama Kompetensi</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama_jenis_kompetensi" name="nama_jenis_kompetensi" required>
                         </div>
                     </div>
                 </div>
@@ -111,10 +95,9 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form action="{{ url('pendidikan/update') }}" method="post">
+      <form action="{{ url('jenis_kompetensi/update') }}" method="post">
         @csrf
           <div class="modal-content">
               <div class="modal-header">
@@ -133,18 +116,12 @@
           </div>
       </form>
     </div>
-</div>
-
+  </div>
 
 @endsection
 
 @section('scripts')
 <script>
-    $("#datepicker").datepicker( {
-        format: "mm-yyyy",
-        viewMode: "months", 
-        minViewMode: "months"
-    });
     function edit(id){
         // let filter = $(this).attr('id'); 
         // filter = filter.split("-");
@@ -152,7 +129,7 @@
         // console.log(id);
         $.ajax({ 
             type : 'get',
-            url : "{{ url('pendidikan/edit')}}/"+id,
+            url : "{{ url('jenis_kompetensi/edit')}}/"+id,
             // data:{'id':id}, 
             success:function(tampil){
 

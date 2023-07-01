@@ -18,6 +18,11 @@
             <li>
                 <a class="nav-link" href="{{ url('/slip_gaji') }}"><i class="fas fa-user"></i> <span>Slip Gaji</span></a>
             </li>
+            @if(Session('profesi_id') == 16)
+            <li>
+                <a class="nav-link" href="{{ url('/slip_jasa_medis') }}"><i class="fas fa-scroll"></i> <span>Jasa Medis</span></a>
+            </li>
+            @endif
             @endif
             @php
                 $sidebar = Session('menu');

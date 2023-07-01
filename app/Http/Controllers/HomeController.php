@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        // dump(Session('profesi_id'));
         $jenis_pendidikan = DB::table('jenis_pendidikan')->whereNull('jenis_pendidikan.deleted_at')->count();
         $pegawai = DB::table('pegawai')->whereNull('pegawai.deleted_at')->count();
         $keluarga_pegawai = DB::table('keluarga_pegawai')->whereNull('keluarga_pegawai.deleted_at')->count();

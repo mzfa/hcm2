@@ -323,6 +323,15 @@ class PegawaiController extends Controller
         DB::table('pelatihan_pegawai')->where(['pelatihan_pegawai_id' => $id])->update($data);
         return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
     }
+    public function hapus_pegawai($id){
+        $id = Crypt::decrypt($id);
+        $data = [
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => now(),
+        ];
+        DB::table('pegawai')->where(['pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
+    }
 
     public function sync()
     {
