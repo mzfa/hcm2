@@ -30,6 +30,7 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Periode</th>
                                         <th>Bagian</th>
                                         <th>Pendidikan</th>
@@ -47,6 +48,7 @@
 
                                         @endphp
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $bulan_fix }} {{ substr($item->periode_gaji,0, 4) }}</td>
                                             <td>{{ $item->bagian }}</td>
                                             <td>{{ $item->pendidikan }}</td>
