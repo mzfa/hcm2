@@ -16,7 +16,7 @@ class SlipGajiController extends Controller
     {
         $pegawai_id = Auth::user()->pegawai_id;
         $pegawai = DB::table('pegawai')->where('pegawai_id', $pegawai_id)->first();
-        $data = DB::table('penggajian')->whereNull('penggajian.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode','asc')->get();
+        $data = DB::table('penggajian')->whereNull('penggajian.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode_gaji','asc')->get();
         // dd($data);
         return view('penggajian.slip_gaji.index', compact('data'));
     }
