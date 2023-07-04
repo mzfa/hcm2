@@ -141,6 +141,24 @@
             } 
         })
     }
+
+    let angka = 0;
+    function pertanyaan_password(){
+        if(angka < 3){
+            var pertanyaan = prompt("Please enter your name");
+            if (pertanyaan === "{{ Session('password_detail') }}") {
+                alert('Berhasil Silahkan melanjutkan aktivitas anda');
+            }else{
+                angka++;
+                pertanyaan_password();
+            }
+            console.log(angka);
+        }else{
+            alert('Password anda salah silahkan menghubungi IT')
+            window.location.href = "{{ url('home') }}";
+        }
+    }
+    pertanyaan_password();
 </script>
 
 @endsection

@@ -78,6 +78,42 @@
     </div>
 
 
+    <div class="modal fade" id="buatPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="buatPasswordLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ url('buat_password') }}" method="post" >
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Buat password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-12 col-form-label">Password</label>
+                            <div class="col-sm-12">
+                            <input type="text" class="form-control" id="password_detail" onkeyup="cekpassword()" name="password_detail" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-12 col-form-label">Konfirmasi Password</label>
+                            <div class="col-sm-12">
+                            <input type="text" class="form-control" id="password_detail_confirm" onkeyup="cekpassword()" name="password_detail_confirm" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" disabled id="ajaxPassword" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
   <!-- General JS Scripts -->
   <script src="{{ url('assets/modules/jquery.min.js') }}"></script>
   <script src="{{ url('assets/modules/popper.js') }}"></script>
@@ -109,7 +145,39 @@
   
 
   <!-- Custom JS -->
+  @if(Session('password_detail') == null && Auth::user()->id !== 0)
+    <script>
+        $(document).ready(function() {
+            ubahpassword();
+        });
+        </script>
+  @endif
   <script>
+      function ubahpassword(){
+          $('#buatPassword').modal('show');
+      }
+      
+    $(document).ready(function() {
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+            }
+        });
+        
+    });
+    function cekpassword(){
+        let pass = $('#password_detail').val();
+        let conf = $('#password_detail_confirm').val();
+        // console.log(pass,conf);
+        if(pass !== conf){
+            $("#ajaxPassword").attr("disabled", true);
+        }else{
+            $("#ajaxPassword").attr("disabled", false);
+        }
+    }
+
+
     $("#table-1").dataTable({
         // dom: 'Bfrtip',
         // buttons: [

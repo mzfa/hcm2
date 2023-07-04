@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -18,5 +19,19 @@ class HomeController extends Controller
         $pelatihan_pegawai = DB::table('pelatihan_pegawai')->whereNull('pelatihan_pegawai.deleted_at')->count();
         // dd($jenis_pendidikan);
         return view('home', compact('jenis_pendidikan','pegawai','keluarga_pegawai','pelatihan_pegawai'));
+    }
+
+    public function buat_password(Request $request){
+        $pegawai_id = Auth::user()->pegawai_id;
+        $request->validate([
+            'password_detail' => ['required', 'string'],
+        ]);
+        // dd($pegawai_id);
+        $data = [
+            'password_detail' => $request->password_detail,
+        ];
+        DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
+        session(['password_detail' => $request->password_detail]);
+        return Redirect::back()->with(['success' => 'Password Berhasil di buat!']);
     }
 }

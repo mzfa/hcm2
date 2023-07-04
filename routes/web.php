@@ -54,6 +54,8 @@ Route::post('/logout', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::POST('/buat_password', [\App\Http\Controllers\HomeController::class, 'buat_password'])->name('buat_password');
+    Route::POST('/ubah_password', [\App\Http\Controllers\HomeController::class, 'ubah_password'])->name('ubah_password');
     // route::group()->middleware();
     
     Route::controller(GajiController::class)->group(function () {
