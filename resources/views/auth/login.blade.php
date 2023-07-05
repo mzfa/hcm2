@@ -40,8 +40,11 @@
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Login</h4></div>
-
+                           
+              <center>
+                <h4 class="mt-5">HCM</h4> 
+                <br><pre>Human Capital Management</pre>
+              </center>
               <div class="card-body">
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">

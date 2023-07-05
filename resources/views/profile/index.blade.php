@@ -452,7 +452,7 @@
                                                         <select name="status_keluarga" id="status_keluarga"
                                                             class="form-control required1">
                                                             <option value="">Pilih</option>
-                                                            <option value="Istri">Istri</option>
+                                                            <option value="Suami/Istri">Suami/Istri</option>
                                                             <option value="Anak">Anak</option>
                                                         </select>
                                                     </div>
