@@ -2,6 +2,27 @@
 
 @section('content')
 
+<script>
+    let angka = 0;
+    function pertanyaan_password(){
+        if(angka < 3){
+            var pertanyaan = prompt("Isikan Password Detail yang sudah di buat pada halaman utama setelah login");
+            if (pertanyaan === "{{ Session('password_detail') }}") {
+                alert('Berhasil, Silahkan melanjutkan aktivitas anda');
+            }else{
+                angka++;
+                alert('Password anda salah... Ini adalah password detail yang di buat pada halaman utama setelah login.')
+                pertanyaan_password();
+            }
+            console.log(angka);
+        }else{
+            alert('Password anda salah silahkan menghubungi IT')
+            window.location.href = "{{ url('home') }}";
+        }
+    }
+    pertanyaan_password();
+</script>
+
 <section class="section">
     <div class="section-header">
         <h1>Slip Gaji</h1>
@@ -142,24 +163,7 @@
         })
     }
 
-    let angka = 0;
-    function pertanyaan_password(){
-        if(angka < 3){
-            var pertanyaan = prompt("Isikan Password Detail yang sudah di buat pada halaman utama setelah login");
-            if (pertanyaan === "{{ Session('password_detail') }}") {
-                alert('Berhasil, Silahkan melanjutkan aktivitas anda');
-            }else{
-                angka++;
-                alert('Password anda salah... Ini adalah password detail yang di buat pada halaman utama setelah login.')
-                pertanyaan_password();
-            }
-            console.log(angka);
-        }else{
-            alert('Password anda salah silahkan menghubungi IT')
-            window.location.href = "{{ url('home') }}";
-        }
-    }
-    pertanyaan_password();
+    
 </script>
 
 @endsection
