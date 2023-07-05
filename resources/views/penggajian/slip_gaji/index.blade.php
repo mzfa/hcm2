@@ -145,11 +145,12 @@
     let angka = 0;
     function pertanyaan_password(){
         if(angka < 3){
-            var pertanyaan = prompt("Please enter your name");
+            var pertanyaan = prompt("Isikan Password Detail yang sudah di buat pada halaman utama setelah login");
             if (pertanyaan === "{{ Session('password_detail') }}") {
-                alert('Berhasil Silahkan melanjutkan aktivitas anda');
+                alert('Berhasil, Silahkan melanjutkan aktivitas anda');
             }else{
                 angka++;
+                alert('Password anda salah... Ini adalah password detail yang di buat pada halaman utama setelah login.')
                 pertanyaan_password();
             }
             console.log(angka);
