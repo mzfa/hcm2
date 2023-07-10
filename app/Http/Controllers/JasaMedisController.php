@@ -21,7 +21,7 @@ class JasaMedisController extends Controller
     {
         // dd($_GET['periode']);
         $periode = $_GET['periode'];
-        $data = DB::table('pegawai')->whereNull('pegawai.deleted_at')->where('profesi_id', 16)->get();
+        $data = DB::table('pegawai')->leftJoin('jasa_medis', 'jasa_medis.pegawai_id', 'pegawai.pegawai_id')->whereNull('pegawai.deleted_at')->where('profesi_id', 16)->get();
         // dd($data);
         return view('penggajian.jasa_medis.add', compact('data','periode'));
     }

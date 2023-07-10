@@ -26,7 +26,7 @@
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             @foreach ($errors->all() as $error)
-                                <strong>{{$error}} <br></strong> 
+                                <strong>{{ $error }} <br></strong> 
                             @endforeach
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -44,7 +44,8 @@
                                     <tbody>
                                         @foreach($data as $item)
                                         <tr>
-                                            <td>{{ $item->nama_pegawai }}</td>
+                                            <td>{{ $item->nama_pegawai }} @isset($item->file_bukti) <a target="_blank" href="{{ url('document/jasa_medis/'.$item->pegawai_id.'/'.$item->file_bukti) }}" class="badge text-white badge-warning">Sudah ada</a> @endisset
+                                            </td>
                                             <td><input type="file" name="file[]" class="form-control"></td>
                                             <input type="hidden" name="pegawai_id[]" value="{{ $item->pegawai_id }}">
                                         </tr>
