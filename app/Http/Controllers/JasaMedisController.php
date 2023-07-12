@@ -21,7 +21,7 @@ class JasaMedisController extends Controller
     {
         // dd($_GET['periode']);
         $periode = $_GET['periode'];
-        $data = DB::table('pegawai')->leftJoin('jasa_medis', 'jasa_medis.pegawai_id', 'pegawai.pegawai_id')->whereNull('pegawai.deleted_at')->where('profesi_id', 16)->get();
+        $data = DB::table('pegawai')->select('pegawai.*','jasa_medis.file_bukti')->leftJoin('jasa_medis', 'jasa_medis.pegawai_id', 'pegawai.pegawai_id')->whereNull('pegawai.deleted_at')->where('profesi_id', 16)->get();
         // dd($data);
         return view('penggajian.jasa_medis.add', compact('data','periode'));
     }
@@ -30,6 +30,7 @@ class JasaMedisController extends Controller
         $request->validate([
             'periode' => ['required'],
         ]);
+        // dd($request);
         $periode = str_replace("-",'', $request->periode);
         $no = 0;
         $file = $request->file('file');
