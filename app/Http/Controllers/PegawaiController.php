@@ -377,8 +377,9 @@ class PegawaiController extends Controller
             ];
         }
         // dd($datanya);
-        DB::table('pegawai')->truncate();
-        $data = DB::table('pegawai')->insert($datanya);
+        DB::table('pegawai')->upsert($datanya, 'pegawai_id');
+        // DB::table('pegawai')->truncate();
+        // $data = DB::table('pegawai')->insert($datanya);
 
         return Redirect::back()->with(['success' => 'Data Berhasil Di Perbarui!']);
 
