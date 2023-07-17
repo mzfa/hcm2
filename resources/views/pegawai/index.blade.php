@@ -25,6 +25,7 @@
                             <a tooltip="Tambah Pegawai Baru" href="{{ url('pegawai/add') }}" id="create_record" class="btn btn-primary text-white shadow-sm">
                                 <i class="bi bi-sync"></i> Tambah Pegawai Baru
                             </a>
+                            <a href="{{ url('pegawai/export') }}" class="btn btn-danger text-white shadow-sm">Excel</a>
                         </div>
                     </div>
                     <div class="card-body">

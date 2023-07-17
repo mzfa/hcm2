@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Exports\ExcelExport;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Crypt;
-
+use Illuminate\Support\Facades\Redirect;
+use App\Exports\ExportUsers;
 
 class PegawaiController extends Controller
 {
@@ -258,6 +260,24 @@ class PegawaiController extends Controller
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
         return true;
         // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+
+    public function export(){
+        // $data       = DB::table('pegawai')->get()->toArray();
+        // // $dataHeader       = DB::connection()->getDoctrineSchemaManager()->listTableIndexes('pegawai');
+        // // dd($dataHeader);
+        // // $dataHeader = array_keys($data[0]);
+        // // $dataHeader = json_decode($data[0], true);
+        // $filename   = 'data-film-export.xlsx';
+        // try {
+        //     Excel::store(new ExcelExport($data, 'main'), $filename, 'public');
+
+        //     return response()->download(storage_path('app\public\\' . $filename));
+        // } catch (\Exception $e) {
+        //     return $e;
+        // }
+        return Excel::download(new ExportUsers, 'users.xlsx');
+
     }
 
     public function table_pendidikan($id){

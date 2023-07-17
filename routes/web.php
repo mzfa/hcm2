@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pegawai', 'index')->name('pegawai.index');
         Route::get('/pegawai/edit/{id}', 'edit');
         Route::get('/pegawai/add', 'add');
+        Route::get('/pegawai/export', 'export');
         Route::get('/pegawai/sync', 'sync');
         Route::post('/pegawai/store', 'store');
         Route::post('/pegawai/update_data_diri', 'update_data_diri');
