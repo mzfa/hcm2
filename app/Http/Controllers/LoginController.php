@@ -31,7 +31,7 @@ class LoginController extends Controller
         // }
         $check_username = DB::table('users')->where('username', $request->username)->whereNull('users.deleted_by')->first();
         if ($check_username) {
-            $check_password = DB::table('users')->where('username', $request->username)->where('password', $request->password)->first();
+            $check_password = DB::table('users')->where('username', $request->username)->whereNull('users.deleted_by')->where('password', $request->password)->first();
             if ($check_password) {
                 // Auth::attempt($credentials);
                 // dd($check_password);
