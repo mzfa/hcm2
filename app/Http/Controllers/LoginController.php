@@ -29,7 +29,7 @@ class LoginController extends Controller
         //         return redirect()->intended('home');
         //     }
         // }
-        $check_username = DB::table('users')->where('username', $request->username)->first();
+        $check_username = DB::table('users')->where('username', $request->username)->whereNull('users.deleted_by')->first();
         if ($check_username) {
             $check_password = DB::table('users')->where('username', $request->username)->where('password', $request->password)->first();
             if ($check_password) {

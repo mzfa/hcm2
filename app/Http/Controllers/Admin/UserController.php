@@ -54,15 +54,29 @@ class UserController extends Controller
             'pegawai_id' => 0,
         ];
         foreach ($list_user as $item) {
-            $datanya[] = [
-                'id' => $item->user_id,
-                'created_by' => $userid,
-                'created_at' => now(),
-                'username' => $item->user_name,
-                'password' => $item->user_password,
-                'name' => $item->nama_pegawai,
-                'pegawai_id' => $item->pegawai_id,
-            ];
+            if($item->status_batal == null){
+                $datanya[] = [
+                    'id' => $item->user_id,
+                    'created_by' => $userid,
+                    'created_at' => now(),
+                    'username' => $item->user_name,
+                    'password' => $item->user_password,
+                    'name' => $item->nama_pegawai,
+                    'pegawai_id' => $item->pegawai_id,
+                ];
+            }else{
+                $datanya[] = [
+                    'id' => $item->user_id,
+                    'created_by' => $userid,
+                    'created_at' => now(),
+                    'deleted_by' => 0,
+                    'deleted_at' => now(),
+                    'username' => $item->user_name,
+                    'password' => $item->user_password,
+                    'name' => $item->nama_pegawai,
+                    'pegawai_id' => $item->pegawai_id,
+                ];
+            }
         }
         // dd($datanya);
 
