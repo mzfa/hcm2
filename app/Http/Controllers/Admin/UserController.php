@@ -38,6 +38,7 @@ class UserController extends Controller
                 'user_name',
                 'user_password',
                 'nama_pegawai',
+                'status_batal',
                 'pegawai_id',
             ])
             ->orderBy('user_id')
@@ -48,6 +49,8 @@ class UserController extends Controller
             'id' => 0,
             'created_by' => $userid,
             'created_at' => now(),
+            'deleted_by' => null,
+            'deleted_at' => null,
             'username' => 'mzfa',
             'password' => 'mzfa',
             'name' => 'mzfa',
@@ -59,6 +62,8 @@ class UserController extends Controller
                     'id' => $item->user_id,
                     'created_by' => $userid,
                     'created_at' => now(),
+                    'deleted_by' => null,
+                    'deleted_at' => null,
                     'username' => $item->user_name,
                     'password' => $item->user_password,
                     'name' => $item->nama_pegawai,
