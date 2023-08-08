@@ -136,6 +136,27 @@
                                                                 class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                         </td>
                                                     </tr>
+                                                        @foreach($substruktur3['substruktur4'] as $substruktur4)
+                                                        <tr class="bg-info text-white">
+                                                            <td>
+                                                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur4['nama_struktur']).' | '. $substruktur4['akronim'] }}</h5>
+                                                            </td>
+                                                            <td>
+                                                                <a onclick="return edit({{ $substruktur4['struktur_id'] }})"
+                                                                    class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
+                                                                <a onclick="return tambahsubstruktur({{ $substruktur4['struktur_id'] }})"
+                                                                    class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
+                                                                @if(empty($substruktur4['substruktur4']))
+                                                                    <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur4['struktur_id'])) }}"
+                                                                    class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
+                                                                @endif
+                                                                {{-- <a onclick="return edit({{ $substruktur4['struktur_id'] }})"
+                                                                    class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
+                                                                <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur4['struktur_id'])) }}"
+                                                                    class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
                                                     @endforeach
                                                 @endforeach
                                             @endforeach

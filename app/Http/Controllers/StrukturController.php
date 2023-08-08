@@ -72,12 +72,26 @@ class StrukturController extends Controller
                                 "struktur_id" => $sub4->struktur_id,
                                 "nama_struktur" => $sub4->nama_struktur,
                                 "akronim" => $sub4->akronim,
-                                'substruktur' => [],
+                                'substruktur4' => [],
                             ]);
 
                             $struktur_id4 = $sub4->struktur_id;
                             $substruktur5 = DB::table('struktur')->where(['parent_id' => $struktur_id4])->whereNull('deleted_at')->get();
-                            // dd($struktur['substruktur']);
+
+                            foreach($substruktur5 as $key5 => $sub5)
+                            {
+                                array_push($struktur[$key]["substruktur"][$key1]["substruktur1"][$key2]["substruktur2"][$key3]["substruktur3"][$key4]["substruktur4"], [
+                                    "struktur_id" => $sub5->struktur_id,
+                                    "nama_struktur" => $sub5->nama_struktur,
+                                    "akronim" => $sub5->akronim,
+                                    'substruktur5' => [],
+                                ]);
+
+                                $struktur_id5 = $sub5->struktur_id;
+                                $substruktur6 = DB::table('struktur')->where(['parent_id' => $struktur_id5])->whereNull('deleted_at')->get();
+                                // dd($struktur['substruktur']);
+                            }
+
                         }
                     }
                 }
