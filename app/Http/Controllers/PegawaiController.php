@@ -20,7 +20,7 @@ class PegawaiController extends Controller
         ->leftJoin('bagian', 'pegawai.bagian_id', '=', 'bagian.bagian_id')
         ->leftJoin('profesi', 'pegawai.profesi_id', '=', 'profesi.profesi_id')
         ->leftJoin('pegawai_detail', 'pegawai.pegawai_id', '=', 'pegawai_detail.pegawai_id')
-        ->leftJoin('struktur', 'pegawai_detail.struktur_id', '=', 'struktur.struktur_id')
+        ->leftJoin('struktur', 'pegawai.struktur_id', '=', 'struktur.struktur_id')
         ->select([
             'pegawai.*',
             'struktur.nama_struktur',
@@ -216,9 +216,14 @@ class PegawaiController extends Controller
         // dd($data);
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);
         $dataa = [
+            'pegawai_id' => $pegawai_id,
             'struktur_id' => $request->struktur_id,
         ];
-        DB::table('pegawai_detail')->where(['pegawai_id' => $pegawai_id])->update($dataa);
+        if($pegdet = DB::table('pegawai_detail')->where('pegawai_id', $pegawai_id)->first()){
+            DB::table('pegawai_detail')->where(['pegawai_id' => $pegawai_id])->update($dataa);
+        }else{
+            DB::table('pegawai_detail')->insert($dataa);
+        }
         return true;
         // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
     }

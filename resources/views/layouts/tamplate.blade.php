@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
 
@@ -78,7 +78,7 @@
   <script src="{{ url('assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
   <script src="{{ url('assets/modules/izitoast/js/iziToast.min.js') }}"></script>
   <script src="{{ url('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
-  <script src="{{ url('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+  {{-- <script src="{{ url('assets/modules/select2/dist/js/select2.full.min.js') }}"></script> --}}
   <script src="{{ url('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
   <script src="{{ url('assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 

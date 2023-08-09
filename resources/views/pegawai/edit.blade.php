@@ -303,7 +303,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Struktur</label>
-                                                    <select name="struktur_id" id="struktur_id" class="form-control">
+                                                    <select name="struktur_id" id="struktur_id" class="form-control select2">
                                                         <option value="">Pilih Struktur</option>
                                                         @foreach($struktur as $item)
                                                         <option @if($data->struktur_id == $item->struktur_id) selected @endif
@@ -315,7 +315,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Grup Kepegawaian</label>
-                                                    <select name="grup_kepegawaian_id" id="grup_kepegawaian_id" class="form-control">
+                                                    <select name="grup_kepegawaian_id" id="grup_kepegawaian_id" class="form-control select2">
                                                         <option value="">Pilih Grup Kepegawaian</option>
                                                         @foreach($grup_kepegawaian as $item)
                                                         <option @if($data->grup_kepegawaian_id == $item->grup_kepegawaian_id) selected @endif
