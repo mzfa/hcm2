@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use App\Exports\ExportUsers;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -158,9 +159,20 @@ class PegawaiController extends Controller
     public function tambah_pelatihan(Request $request){
         // dd($request->hasFile('bukti_pelatihan'));
         if($request->hasFile('bukti_pelatihan')){
-            $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
+            // dd('ok');
+            // $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
             // dd($bukti_pelatihan);
-            $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
+            $filenamewithextension = $request->file('file')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('file')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = round(microtime(true) * 1000).'-'.$filename.'_'.uniqid().'.'.$extension;
+            $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('file'), 'r+'));
+
+            // dd($hasil);
+            // $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
             $pegawai_id = Crypt::decrypt($request->pegawai_id);
             $data = [
                 'created_by' => Auth::user()->id,
@@ -171,7 +183,7 @@ class PegawaiController extends Controller
                 'penyelenggara' => $request->penyelenggara,
                 'jam_pelajaran' => $request->jam_pelajaran,
                 'grup_kepegawaian_id' => $request->grup_kepegawaian_id,
-                'bukti_pelatihan' => $bukti_pelatihan,
+                'bukti_pelatihan' => $filenametostore,
                 'pegawai_id' => $pegawai_id,
             ];
             DB::table('pelatihan_pegawai')->insert($data);
@@ -242,8 +254,6 @@ class PegawaiController extends Controller
             $kota = $request->kota_ktp;
             $kecamatan = $request->kecamatan_ktp;
         }
-
-
         $data = [
             'updated_by' => Auth::user()->id,
             'updated_at' => now(),
@@ -282,7 +292,6 @@ class PegawaiController extends Controller
         //     return $e;
         // }
         return Excel::download(new ExportUsers, 'users.xlsx');
-
     }
 
     public function table_pendidikan($id){
@@ -306,7 +315,6 @@ class PegawaiController extends Controller
         $pelatihan_pegawai = DB::table('pelatihan_pegawai')->whereNull('pelatihan_pegawai.deleted_at')->where('pegawai_id', $pegawai_id)->get();
         return view('table.pelatihan_pegawai', compact('pelatihan_pegawai'));
     }
-
     public function hapus_pendidikan($id){
         $id = Crypt::decrypt($id);
         // if($data = DB::select("SELECT * FROM tbl_menu WHERE menu_id='$id'")){

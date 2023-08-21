@@ -210,9 +210,19 @@ class ProfileController extends Controller
     public function tambah_pelatihan(Request $request){
         // dd($request->hasFile('bukti_pelatihan'));
         if($request->hasFile('bukti_pelatihan')){
-            $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
+            // $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
             // dd($bukti_pelatihan);
-            $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
+            // $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
+            $filenamewithextension = $request->file('bukti_pelatihan')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('bukti_pelatihan')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = round(microtime(true) * 1000).'-'.$filename.'_'.uniqid().'.'.$extension;
+            $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('bukti_pelatihan'), 'r+'));
+
+            // dd($hasil);
             $pegawai_id = Crypt::decrypt($request->pegawai_id);
             $data = [
                 'created_by' => Auth::user()->id,
@@ -222,7 +232,7 @@ class ProfileController extends Controller
                 'tanggal_pelatihan' => $request->tanggal_pelatihan,
                 'penyelenggara' => $request->penyelenggara,
                 'jam_pelajaran' => $request->jam_pelajaran,
-                'bukti_pelatihan' => $bukti_pelatihan,
+                'bukti_pelatihan' => $filenametostore,
                 'pegawai_id' => $pegawai_id,
             ];
             DB::table('pelatihan_pegawai')->insert($data);
