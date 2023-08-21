@@ -988,6 +988,7 @@
                         tablePelatihan('{{ Crypt::encrypt($data->pegawai_id) }}')
                     },
                     error: function(data) {
+                        console.log(data)
                         iziToast.warning({
                             title: 'Opps!',
                             message: 'Data Gagal Disimpan',

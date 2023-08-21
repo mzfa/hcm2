@@ -213,34 +213,40 @@ class ProfileController extends Controller
             // $bukti_pelatihan = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('bukti_pelatihan')->getClientOriginalName());
             // dd($bukti_pelatihan);
             // $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
-            $filenamewithextension = $request->file('bukti_pelatihan')->getClientOriginalName();
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
-            $extension = $request->file('bukti_pelatihan')->getClientOriginalExtension();
-            //filename to store
-            $filenametostore = round(microtime(true) * 1000).'-'.$filename.'_'.uniqid().'.'.$extension;
-            $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('bukti_pelatihan'), 'r+'));
+            $file = $request->file('bukti_pelatihan');
+            if(in_array($file->getClientMimeType(),['image/jpg','image/jpeg','image/png','application/pdf'])){
+                $filenamewithextension = $request->file('bukti_pelatihan')->getClientOriginalName();
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+                //get file extension
+                $extension = $request->file('bukti_pelatihan')->getClientOriginalExtension();
+                //filename to store
+                $filenametostore = round(microtime(true) * 1000).'-'.$filename.'_'.uniqid().'.'.$extension;
+                $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('bukti_pelatihan'), 'r+'));
 
-            // dd($hasil);
-            $pegawai_id = Crypt::decrypt($request->pegawai_id);
-            $data = [
-                'created_by' => Auth::user()->id,
-                'created_at' => now(),
-                'jenis_pelatihan_id' => $request->jenis_pelatihan,
-                'nama_pelatihan' => $request->nama_pelatihan,
-                'tanggal_pelatihan' => $request->tanggal_pelatihan,
-                'penyelenggara' => $request->penyelenggara,
-                'jam_pelajaran' => $request->jam_pelajaran,
-                'bukti_pelatihan' => $filenametostore,
-                'pegawai_id' => $pegawai_id,
-            ];
-            DB::table('pelatihan_pegawai')->insert($data);
-            return true;
+                // dd($hasil);
+                $pegawai_id = Crypt::decrypt($request->pegawai_id);
+                $data = [
+                    'created_by' => Auth::user()->id,
+                    'created_at' => now(),
+                    'jenis_pelatihan_id' => $request->jenis_pelatihan,
+                    'nama_pelatihan' => $request->nama_pelatihan,
+                    'tanggal_pelatihan' => $request->tanggal_pelatihan,
+                    'penyelenggara' => $request->penyelenggara,
+                    'jam_pelajaran' => $request->jam_pelajaran,
+                    'bukti_pelatihan' => $filenametostore,
+                    'pegawai_id' => $pegawai_id,
+                ];
+                DB::table('pelatihan_pegawai')->insert($data);
+                return true;
+            }
+            dd('File Upload hanya (JPG,JPEG,PNG,PDF)');
+            // return 'File Upload hanya (JPG,JPEG,PNG,PDF)';
         }
-        return false;
+        dd('File tidak ditemukan');
+        // return false;
         // return Redirect('pegawai')->with(['success' => 'Data Berhasil Di Simpan!']);
-    }
+    }   
 
     public function update_data_diri(Request $request){
         // dd($request);
