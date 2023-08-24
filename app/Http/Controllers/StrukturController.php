@@ -126,22 +126,35 @@ class StrukturController extends Controller
     {
         // $id = Crypt::decrypt($id);
         // dd($data);
+        $struktur = DB::table('struktur')->get();
+        // dd($struktur);
         $text = "Data tidak ditemukan";
         if($data = DB::table('struktur')->where(['struktur_id' => $id])->first()){
 
-            $text = '<div class="mb-3 row">'.
-                    '<label for="staticEmail" class="col-sm-2 col-form-label">Nama struktur</label>'.
-                    '<div class="col-sm-10">'.
-                    '<input type="text" class="form-control" id="nama_struktur" name="nama_struktur" value="'.$data->nama_struktur.'" required>'.
-                    '</div>'.
-                '</div>'.
-                '<div class="mb-3 row">'.
-                    '<label for="staticEmail" class="col-sm-2 col-form-label">Akronim (Singkatan)</label>'.
-                    '<div class="col-sm-10">'.
-                    '<input type="text" class="form-control" id="akronim" name="akronim" value="'.$data->akronim.'" required>'.
-                    '</div>'.
-                '</div>'.
-                '<input type="hidden" class="form-control" id="struktur_id" name="struktur_id" value="'.Crypt::encrypt($data->struktur_id) .'" required>';
+            // $text = '<div class="mb-3 row">'.
+            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Nama struktur</label>'.
+            //         '<div class="col-sm-10">'.
+            //         '<input type="text" class="form-control" id="nama_struktur" name="nama_struktur" value="'.$data->nama_struktur.'" required>'.
+            //         '</div>'.
+            //     '</div>'.
+            //     '<div class="mb-3 row">'.
+            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Akronim (Singkatan)</label>'.
+            //         '<div class="col-sm-10">'.
+            //         '<input type="text" class="form-control" id="akronim" name="akronim" value="'.$data->akronim.'" required>'.
+            //         '</div>'.
+            //     '</div>'.
+            //     '<div class="mb-3 row">'.
+            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Akronim (Singkatan)</label>'.
+            //         '<div class="col-sm-10">'.
+            //         '<select class="form-control" name="parent_id">';
+            //             foreach($struktur as $item){
+            //                 $text .= '<option value="'.$item->struktur_id.'" '.($item->struktur_id == $data->parent_id) ?? "selected".'>'.$item->nama_struktur.'</option>';
+            //             }
+            //         $text .= '</select>'.
+            //         '</div>'.
+            //     '</div>'.
+            //     '<input type="hidden" class="form-control" id="struktur_id" name="struktur_id" value="'.Crypt::encrypt($data->struktur_id) .'" required>';
+            return view('struktur.edit', compact('struktur','data'));
         }
         return $text;
         // return view('admin.struktur.edit');
@@ -155,6 +168,7 @@ class StrukturController extends Controller
         $data = [
             'nama_struktur' => $request->nama_struktur,
             'akronim' => $request->akronim,
+            'parent_id' => $request->parent_id,
             'updated_by' => Auth::user()->id,
             'updated_at' => now(),
         ];
