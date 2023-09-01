@@ -237,6 +237,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(SlipGajiController::class)->group(function () {
         Route::get('/slip_gaji', 'index');
         Route::get('/slip_gaji/detail/{id}', 'detail');
+        Route::get('/slip_gaji/cetak/{id}', 'cetak');
         Route::post('/slip_gaji/store', 'store');
         Route::post('/slip_gaji/update', 'update');
         Route::get('/slip_gaji/delete/{id}', 'delete');
