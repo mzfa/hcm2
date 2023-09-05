@@ -130,7 +130,7 @@ class PenggajianManualController extends Controller
     {
         $id = Crypt::decrypt($id);
         $data = DB::table('penggajian')->leftJoin('pegawai','penggajian.nip','pegawai.nip')->where('penggajian_id',$id)->whereNull('penggajian.deleted_at')->first();
-        return view('penggajian.penggajian_manual.detail', compact('data'));
+        return view('penggajian.penggajian_manual.detail', compact('data','id'));
     }
     // public function createPDF(){
     //     // retreive all records from db
