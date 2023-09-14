@@ -1232,5 +1232,9 @@
             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
             document.getElementById("yourage").value = Math.round(diffDays/365) + " Tahun";
         }
+
+        if(jQuery().select2) {
+            $(".select2").select2();
+        }
     </script>
 @endsection
