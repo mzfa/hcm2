@@ -19,13 +19,13 @@
                     <div class="card-header">
                         <h4>Pegawai</h4>
                         <div class="col-auto">
-                            {{-- <a tooltip="Sync Data Pegawai" href="{{ url('pegawai/sync') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
+                            <a tooltip="Sync Data Pegawai" onclick="return confirm('Apakah anda ingin sinkronisasi ke aplikasi PHIS?')" href="{{ url('pegawai/sync') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
                                 <i class="bi bi-sync"></i> Sync
-                            </a> --}}
-                            <a tooltip="Tambah Pegawai Baru" href="{{ url('pegawai/add') }}" id="create_record" class="btn btn-primary text-white shadow-sm">
-                                <i class="bi bi-sync"></i> Tambah Pegawai Baru
                             </a>
-                            <a href="{{ url('pegawai/export') }}" class="btn btn-danger text-white shadow-sm">Excel</a>
+                            {{-- <a tooltip="Tambah Pegawai Baru" href="{{ url('pegawai/add') }}" id="create_record" class="btn btn-primary text-white shadow-sm">
+                                <i class="bi bi-sync"></i> Tambah Pegawai Baru
+                            </a> --}}
+                            <a href="{{ url('pegawai/export') }}" class="btn btn-success shadow-sm">Excel</a>
                         </div>
                     </div>
                     <div class="card-body">
