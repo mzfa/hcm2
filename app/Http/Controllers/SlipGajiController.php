@@ -16,7 +16,20 @@ class SlipGajiController extends Controller
     public function index()
     {
         $pegawai_id = Auth::user()->pegawai_id;
-        $pegawai = DB::table('pegawai')->where('pegawai_id', $pegawai_id)->first();
+        $pegawai = DB::table('pegawai')
+        ->leftJoin('pegawai_detail', 'pegawai.pegawai_id', '=', 'pegawai_detail.pegawai_id')
+        ->leftJoin('struktur', 'pegawai.struktur_id', '=', 'struktur.struktur_id')
+        ->select([
+            'pegawai.*',
+            'struktur.nama_struktur',
+        ])
+        ->whereNull('pegawai.deleted_at')
+        ->where('pegawai.pegawai_id', $pegawai_id)
+        ->first();
+        if(is_null($pegawai->tanggal_lahir) && is_null($pegawai->status_kawin) && is_null($pegawai->alamat) && is_null($pegawai->telp_pribadi) && is_null($pegawai->kecamatan)){
+            return Redirect('profile')->with(['error' => 'Untuk melihat slip gaji mohon melengkapi data diri anda terlebih dahulu!']);
+        }
+        // $pegawai = DB::table('pegawai')->where('pegawai_id', $pegawai_id)->first();
         $data = DB::table('penggajian')->whereNull('penggajian.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode_gaji','asc')->get();
         // dd($data);
         return view('penggajian.slip_gaji.index', compact('data'));
