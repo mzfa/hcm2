@@ -60,6 +60,7 @@
                                             <td>
                                                 <a href="{{ url('pegawai/edit/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-info">Edit</a>
                                                 <a onclick="return confirm('Apakah anda Yakin ingin menghapus ini?')" href="{{ url('pegawai/hapus_pegawai/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-danger">Hapus</a>
+                                                <a onclick="return confirm('Apakah anda Yakin ingin mengecek ID Satu Sehat?')" href="{{ url('pegawai/cek_satusehat/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-warning">Satu Sehat</a>
                                             </td>
                                         </tr>
                                     @endforeach

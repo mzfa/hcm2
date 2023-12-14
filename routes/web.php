@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\StrukturController;
+use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BagianController;
 use App\Http\Controllers\PegawaiController;
@@ -87,6 +88,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/struktur/store', 'store');
         Route::post('/struktur/update', 'update');
     });
+    Route::controller(LokasiController::class)->middleware('cek_login:lokasi.index')->group(function () {
+        Route::get('/lokasi', 'index')->name('lokasi.index');
+        Route::get('/lokasi/edit/{id}', 'edit');
+        Route::get('/lokasi/status/{id}', 'status');
+        Route::get('/lokasi/delete/{id}', 'delete');
+        Route::post('/lokasi/store', 'store');
+        Route::post('/lokasi/update', 'update');
+    });
     Route::controller(UserController::class)->middleware('cek_login:user.index')->group(function () {
         Route::get('/user', 'index')->name('user.index');
         Route::get('/user/sync', 'sync');
@@ -103,6 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::controller(PegawaiController::class)->middleware('cek_login:pegawai.index')->group(function () {
         Route::get('/pegawai', 'index')->name('pegawai.index');
+        Route::get('/pegawai/cek_satusehat/{id}', 'cek_satusehat');
         Route::get('/pegawai/edit/{id}', 'edit');
         Route::get('/pegawai/add', 'add');
         Route::get('/pegawai/export', 'export');

@@ -164,14 +164,14 @@ class PegawaiController extends Controller
             // dd($bukti_pelatihan);
             $file = $request->file('bukti_pelatihan');
             if(in_array($file->getClientMimeType(),['image/jpg','image/jpeg','image/png','application/pdf'])){
-                $filenamewithextension = $request->file('file')->getClientOriginalName();
+                $filenamewithextension = $request->file('bukti_pelatihan')->getClientOriginalName();
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
                 //get file extension
-                $extension = $request->file('file')->getClientOriginalExtension();
+                $extension = $request->file('bukti_pelatihan')->getClientOriginalExtension();
                 //filename to store
                 $filenametostore = round(microtime(true) * 1000).'-'.$filename.'_'.uniqid().'.'.$extension;
-                $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('file'), 'r+'));
+                $hasil = Storage::disk('ftp')->put($filenametostore, fopen($request->file('bukti_pelatihan'), 'r+'));
 
                 // dd($hasil);
                 // $request->file('bukti_pelatihan')->move(public_path('document/pelatihan/'), $bukti_pelatihan);
@@ -184,7 +184,6 @@ class PegawaiController extends Controller
                     'tanggal_pelatihan' => $request->tanggal_pelatihan,
                     'penyelenggara' => $request->penyelenggara,
                     'jam_pelajaran' => $request->jam_pelajaran,
-                    'grup_kepegawaian_id' => $request->grup_kepegawaian_id,
                     'bukti_pelatihan' => $filenametostore,
                     'pegawai_id' => $pegawai_id,
                 ];
@@ -368,6 +367,42 @@ class PegawaiController extends Controller
         ];
         DB::table('pegawai')->where(['pegawai_id' => $id])->update($data);
         return Redirect::back()->with(['success' => 'Data Berhasil Di Hapus!']);
+    }
+
+    public function cek_satusehat($id){
+        $id = Crypt::decrypt($id);
+
+        $data = DB::table('pegawai')->whereNull('pegawai.deleted_at')->where('pegawai_id', $id)->first();
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/practitioner',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array('nik' => $data->nik),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res = json_decode($response);
+        $res = json_decode($res);
+        if(empty($res->id)){
+            dd($response,$res);
+        }
+        $satusehat_id = $res->id;
+        // dd('ok');
+
+        $data = [
+            'satusehat_id' => $satusehat_id,
+        ];
+        DB::table('pegawai')->where(['pegawai_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Satu sehat berhasil diperbarui!']);
     }
 
     public function sync()

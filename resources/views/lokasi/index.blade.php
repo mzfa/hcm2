@@ -3,21 +3,21 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Struktur</h1>
+        <h1>Lokasi</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
-            <div class="breadcrumb-item">Struktur</div>
+            <div class="breadcrumb-item">Lokasi</div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">Struktur</h2>
+        <h2 class="section-title">Lokasi</h2>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Struktur</h4>
+                        <h4>Lokasi</h4>
                         <div class="col-auto">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-plus"></i> Tambah
@@ -29,131 +29,131 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Nama Struktur</th>
+                                        <th>Nama Lokasi</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php $no=1 @endphp
-                                    @foreach ($struktur as $item)
+                                    @foreach ($lokasi as $item)
                                         <tr class="bg-info">
                                             <td>
-                                                <h5 class="text-white">{{ strtoupper($item['nama_struktur']).' | '. $item['akronim'] }} @if($item['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                <h5 class="text-white">{{ strtoupper($item['nama_lokasi']).' | '. $item['akronim'] }} @if($item['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                 @if ($item['parent_id'] == 0)
                                                 @else
                                                     <h5 class="text-primary">
-                                                        {{ strtoupper($item['nama_struktur']).' | '. $item['akronim'] }}
+                                                        {{ strtoupper($item['nama_lokasi']).' | '. $item['akronim'] }}
                                                     </h5>
                                                 @endif
                                                 </td>
                                             <td>
-                                                <a onclick="return edit({{ $item['struktur_id'] }})"
+                                                <a onclick="return edit({{ $item['lokasi_id'] }})"
                                                     class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                <a onclick="return tambahsubstruktur({{ $item['struktur_id'] }})"
+                                                <a onclick="return tambahsublokasi({{ $item['lokasi_id'] }})"
                                                     class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                    @if(empty($item['substruktur']))
-                                                    <a href="{{ url('struktur/delete/' . Crypt::encrypt($item['struktur_id'])) }}"
+                                                    @if(empty($item['sublokasi']))
+                                                    <a href="{{ url('lokasi/delete/' . Crypt::encrypt($item['lokasi_id'])) }}"
                                                         class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                     @endif
                                             </td>
                                         </tr>
-                                        @foreach($item['substruktur'] as $substruktur)
+                                        @foreach($item['sublokasi'] as $sublokasi)
                                         <tr class="bg-primary">
                                             <td>
-                                                <h5 class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur['nama_struktur']).' | '. $substruktur['akronim'] }}@if($substruktur['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                <h5 class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($sublokasi['nama_lokasi']).' | '. $sublokasi['akronim'] }}@if($sublokasi['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                             </td>
                                             <td>
-                                                <a onclick="return edit({{ $substruktur['struktur_id'] }})"
+                                                <a onclick="return edit({{ $sublokasi['lokasi_id'] }})"
                                                     class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                <a onclick="return tambahsubstruktur({{ $substruktur['struktur_id'] }})"
+                                                <a onclick="return tambahsublokasi({{ $sublokasi['lokasi_id'] }})"
                                                     class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                @if(empty($substruktur['substruktur1']))
-                                                    <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur['struktur_id'])) }}"
+                                                @if(empty($sublokasi['sublokasi1']))
+                                                    <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi['lokasi_id'])) }}"
                                                     class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                 @endif
-                                                {{-- <a onclick="return edit({{ $substruktur['struktur_id'] }})"
+                                                {{-- <a onclick="return edit({{ $sublokasi['lokasi_id'] }})"
                                                     class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
-                                                <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur['struktur_id'])) }}"
+                                                <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi['lokasi_id'])) }}"
                                                     class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                             </td>
                                         </tr>
-                                            @foreach($substruktur['substruktur1'] as $substruktur1)
+                                            @foreach($sublokasi['sublokasi1'] as $sublokasi1)
                                             <tr class="bg-success">
                                                 <td>
-                                                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur1['nama_struktur']).' | '. $substruktur1['akronim'] }}@if($substruktur1['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($sublokasi1['nama_lokasi']).' | '. $sublokasi1['akronim'] }}@if($sublokasi1['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                 </td>
                                                 <td>
-                                                    <a onclick="return edit({{ $substruktur1['struktur_id'] }})"
+                                                    <a onclick="return edit({{ $sublokasi1['lokasi_id'] }})"
                                                         class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                    <a onclick="return tambahsubstruktur({{ $substruktur1['struktur_id'] }})"
+                                                    <a onclick="return tambahsublokasi({{ $sublokasi1['lokasi_id'] }})"
                                                         class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                    @if(empty($substruktur1['substruktur2']))
-                                                        <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur1['struktur_id'])) }}"
+                                                    @if(empty($sublokasi1['sublokasi2']))
+                                                        <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi1['lokasi_id'])) }}"
                                                         class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                     @endif
-                                                    {{-- <a onclick="return edit({{ $substruktur1['struktur_id'] }})"
+                                                    {{-- <a onclick="return edit({{ $sublokasi1['lokasi_id'] }})"
                                                         class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
-                                                    <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur1['struktur_id'])) }}"
+                                                    <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi1['lokasi_id'])) }}"
                                                         class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                 </td>
                                             </tr>
-                                                @foreach($substruktur1['substruktur2'] as $substruktur2)
+                                                @foreach($sublokasi1['sublokasi2'] as $sublokasi2)
                                                 <tr class="bg-secondary">
                                                     <td>
-                                                        <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur2['nama_struktur']).' | '. $substruktur2['akronim'] }} @if($substruktur2['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                        <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($sublokasi2['nama_lokasi']).' | '. $sublokasi2['akronim'] }} @if($sublokasi2['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                     </td>
                                                     <td>
-                                                        <a onclick="return edit({{ $substruktur2['struktur_id'] }})"
+                                                        <a onclick="return edit({{ $sublokasi2['lokasi_id'] }})"
                                                             class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                        <a onclick="return tambahsubstruktur({{ $substruktur2['struktur_id'] }})"
+                                                        <a onclick="return tambahsublokasi({{ $sublokasi2['lokasi_id'] }})"
                                                             class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                        @if(empty($substruktur2['substruktur3']))
-                                                            <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur2['struktur_id'])) }}"
+                                                        @if(empty($sublokasi2['sublokasi3']))
+                                                            <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi2['lokasi_id'])) }}"
                                                             class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                         @endif
-                                                        {{-- <a onclick="return edit({{ $substruktur2['struktur_id'] }})"
+                                                        {{-- <a onclick="return edit({{ $sublokasi2['lokasi_id'] }})"
                                                             class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
-                                                        <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur2['struktur_id'])) }}"
+                                                        <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi2['lokasi_id'])) }}"
                                                             class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                     </td>
                                                 </tr>
-                                                    @foreach($substruktur2['substruktur3'] as $substruktur3)
+                                                    @foreach($sublokasi2['sublokasi3'] as $sublokasi3)
                                                     <tr>
                                                         <td>
-                                                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur3['nama_struktur']).' | '. $substruktur3['akronim'] }}@if($substruktur3['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($sublokasi3['nama_lokasi']).' | '. $sublokasi3['akronim'] }}@if($sublokasi3['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                         </td>
                                                         <td>
-                                                            <a onclick="return edit({{ $substruktur3['struktur_id'] }})"
+                                                            <a onclick="return edit({{ $sublokasi3['lokasi_id'] }})"
                                                                 class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                            <a onclick="return tambahsubstruktur({{ $substruktur3['struktur_id'] }})"
+                                                            <a onclick="return tambahsublokasi({{ $sublokasi3['lokasi_id'] }})"
                                                                 class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                            @if(empty($substruktur3['substruktur3']))
-                                                                <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur3['struktur_id'])) }}"
+                                                            @if(empty($sublokasi3['sublokasi3']))
+                                                                <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi3['lokasi_id'])) }}"
                                                                 class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                             @endif
-                                                            {{-- <a onclick="return edit({{ $substruktur3['struktur_id'] }})"
+                                                            {{-- <a onclick="return edit({{ $sublokasi3['lokasi_id'] }})"
                                                                 class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
-                                                            <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur3['struktur_id'])) }}"
+                                                            <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi3['lokasi_id'])) }}"
                                                                 class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                         </td>
                                                     </tr>
-                                                        @foreach($substruktur3['substruktur4'] as $substruktur4)
+                                                        @foreach($sublokasi3['sublokasi4'] as $sublokasi4)
                                                         <tr class="bg-info text-white">
                                                             <td>
-                                                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur4['nama_struktur']).' | '. $substruktur4['akronim'] }}@if($substruktur4['satusehat_id'] !== '') <i class="fa fa-check"></i> @endif</h5>
+                                                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($sublokasi4['nama_lokasi']).' | '. $sublokasi4['akronim'] }}@if($sublokasi4['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                             </td>
                                                             <td>
-                                                                <a onclick="return edit({{ $substruktur4['struktur_id'] }})"
+                                                                <a onclick="return edit({{ $sublokasi4['lokasi_id'] }})"
                                                                     class="btn text-white btn-warning"><i class="fa fa-pen"></i></a>
-                                                                <a onclick="return tambahsubstruktur({{ $substruktur4['struktur_id'] }})"
+                                                                <a onclick="return tambahsublokasi({{ $sublokasi4['lokasi_id'] }})"
                                                                     class="btn text-white btn-primary"><i class="fa fa-plus"></i></a>
-                                                                @if(empty($substruktur4['substruktur4']))
-                                                                    <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur4['struktur_id'])) }}"
+                                                                @if(empty($sublokasi4['sublokasi4']))
+                                                                    <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi4['lokasi_id'])) }}"
                                                                     class="btn text-white btn-danger"><i class="fa fa-trash"></i></a>
                                                                 @endif
-                                                                {{-- <a onclick="return edit({{ $substruktur4['struktur_id'] }})"
+                                                                {{-- <a onclick="return edit({{ $sublokasi4['lokasi_id'] }})"
                                                                     class="btn text-white btn-info"><i class="fa fa-pen"></i></a>
-                                                                <a href="{{ url('struktur/delete/' . Crypt::encrypt($substruktur4['struktur_id'])) }}"
+                                                                <a href="{{ url('lokasi/delete/' . Crypt::encrypt($sublokasi4['lokasi_id'])) }}"
                                                                     class="btn text-white btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                             </td>
                                                         </tr>
@@ -176,7 +176,7 @@
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ url('struktur/store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('lokasi/store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -187,9 +187,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama struktur</label>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama lokasi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama_struktur" name="nama_struktur" required>
+                            <input type="text" class="form-control" id="nama_lokasi" name="nama_lokasi" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -207,10 +207,10 @@
         </form>
     </div>
 </div>
-<div class="modal fade" id="substrukturModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="substrukturModalLabel" aria-hidden="true">
+<div class="modal fade" id="sublokasiModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="sublokasiModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ url('struktur/store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('lokasi/store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -221,9 +221,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label for="nama_struktur" class="col-sm-2 col-form-label">Nama struktur</label>
+                        <label for="nama_lokasi" class="col-sm-2 col-form-label">Nama lokasi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama_struktur" name="nama_struktur" required>
+                            <input type="text" class="form-control" id="nama_lokasi" name="nama_lokasi" required>
                         </div>
                     </div>
                     
@@ -247,7 +247,7 @@
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ url('struktur/update') }}" method="post">
+        <form action="{{ url('lokasi/update') }}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -275,7 +275,7 @@
         function edit(id) {
             $.ajax({
                 type: 'get',
-                url: "{{ url('struktur/edit') }}/" + id,
+                url: "{{ url('lokasi/edit') }}/" + id,
                 // data:{'id':id}, 
                 success: function(tampil) {
 
@@ -286,9 +286,9 @@
             })
         }
 
-        function tambahsubstruktur(id) {
+        function tambahsublokasi(id) {
             $('#parent_id').val(id);
-            $('#substrukturModal').modal('show');
+            $('#sublokasiModal').modal('show');
         }
     </script>
 @endsection
