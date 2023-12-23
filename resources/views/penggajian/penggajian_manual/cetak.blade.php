@@ -195,6 +195,12 @@
                                                 <td>Potongan Obat</td>
                                                 <th style="text-align: right">{{ number_format($data->pemotongan_obat) }}</th>
                                             </tr>
+                                            @if($data->potongan_koperasi !== '0' && $data->potongan_koperasi !== null)
+                                            <tr>
+                                                <td>Potongan Koperasi</td>
+                                                <th style="text-align: right">{{ number_format($data->potongan_koperasi) }}</th>
+                                            </tr>
+                                            @endif
                                             <tr>
                                                 <td>Lain-lain</td>
                                                 <th style="text-align: right">{{ number_format($data->lain_lain) }}</th>
