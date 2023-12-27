@@ -376,7 +376,7 @@ class PegawaiController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/practitioner',
+        CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/practitioner',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

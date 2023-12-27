@@ -136,30 +136,6 @@ class StrukturController extends Controller
         // dd($struktur);
         $text = "Data tidak ditemukan";
         if($data = DB::table('struktur')->where(['struktur_id' => $id])->first()){
-
-            // $text = '<div class="mb-3 row">'.
-            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Nama struktur</label>'.
-            //         '<div class="col-sm-10">'.
-            //         '<input type="text" class="form-control" id="nama_struktur" name="nama_struktur" value="'.$data->nama_struktur.'" required>'.
-            //         '</div>'.
-            //     '</div>'.
-            //     '<div class="mb-3 row">'.
-            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Akronim (Singkatan)</label>'.
-            //         '<div class="col-sm-10">'.
-            //         '<input type="text" class="form-control" id="akronim" name="akronim" value="'.$data->akronim.'" required>'.
-            //         '</div>'.
-            //     '</div>'.
-            //     '<div class="mb-3 row">'.
-            //         '<label for="staticEmail" class="col-sm-2 col-form-label">Akronim (Singkatan)</label>'.
-            //         '<div class="col-sm-10">'.
-            //         '<select class="form-control" name="parent_id">';
-            //             foreach($struktur as $item){
-            //                 $text .= '<option value="'.$item->struktur_id.'" '.($item->struktur_id == $data->parent_id) ?? "selected".'>'.$item->nama_struktur.'</option>';
-            //             }
-            //         $text .= '</select>'.
-            //         '</div>'.
-            //     '</div>'.
-            //     '<input type="hidden" class="form-control" id="struktur_id" name="struktur_id" value="'.Crypt::encrypt($data->struktur_id) .'" required>';
             return view('struktur.edit', compact('struktur','data'));
         }
         return $text;
@@ -185,7 +161,7 @@ class StrukturController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/organisasi/'.$satusehat_id,
+            CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/organisasi/'.$satusehat_id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -209,7 +185,7 @@ class StrukturController extends Controller
         }else{
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/organisasi',
+            CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/organisasi',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

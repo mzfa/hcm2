@@ -186,7 +186,7 @@ class LokasiController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/lokasi/'.$satusehat_id,
+            CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/lokasi/'.$satusehat_id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -210,7 +210,7 @@ class LokasiController extends Controller
         }else{
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/projek/satu_sehat/public/api/lokasi',
+            CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/lokasi',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
