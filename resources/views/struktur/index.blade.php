@@ -38,7 +38,7 @@
                                     @foreach ($struktur as $item)
                                         <tr class="bg-info">
                                             <td>
-                                                <h5 class="text-white">{{ strtoupper($item['nama_struktur']).' | '. $item['akronim'] }} @if($item['satusehat_id'] !== '' || $item['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                <h5 class="text-white">{{ strtoupper($item['nama_struktur']).' | '. $item['akronim'] }} @if($item['satusehat_id'] !== '' && $item['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                 @if ($item['parent_id'] == 0)
                                                 @else
                                                     <h5 class="text-primary">
@@ -60,7 +60,7 @@
                                         @foreach($item['substruktur'] as $substruktur)
                                         <tr class="bg-primary">
                                             <td>
-                                                <h5 class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur['nama_struktur']).' | '. $substruktur['akronim'] }}@if($substruktur['satusehat_id'] !== '' || $substruktur['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                <h5 class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur['nama_struktur']).' | '. $substruktur['akronim'] }}@if($substruktur['satusehat_id'] !== '' && $substruktur['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                             </td>
                                             <td>
                                                 <a onclick="return edit({{ $substruktur['struktur_id'] }})"
@@ -80,7 +80,7 @@
                                             @foreach($substruktur['substruktur1'] as $substruktur1)
                                             <tr class="bg-success">
                                                 <td>
-                                                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur1['nama_struktur']).' | '. $substruktur1['akronim'] }}@if($substruktur1['satusehat_id'] !== '' || $substruktur1['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur1['nama_struktur']).' | '. $substruktur1['akronim'] }}@if($substruktur1['satusehat_id'] !== '' && $substruktur1['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                 </td>
                                                 <td>
                                                     <a onclick="return edit({{ $substruktur1['struktur_id'] }})"
@@ -100,7 +100,7 @@
                                                 @foreach($substruktur1['substruktur2'] as $substruktur2)
                                                 <tr class="bg-secondary">
                                                     <td>
-                                                        <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur2['nama_struktur']).' | '. $substruktur2['akronim'] }} @if($substruktur2['satusehat_id'] !== '' || $substruktur2['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                        <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur2['nama_struktur']).' | '. $substruktur2['akronim'] }} @if($substruktur2['satusehat_id'] !== '' && $substruktur2['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                     </td>
                                                     <td>
                                                         <a onclick="return edit({{ $substruktur2['struktur_id'] }})"
@@ -120,7 +120,7 @@
                                                     @foreach($substruktur2['substruktur3'] as $substruktur3)
                                                     <tr>
                                                         <td>
-                                                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur3['nama_struktur']).' | '. $substruktur3['akronim'] }}@if($substruktur3['satusehat_id'] !== '' || $substruktur3['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur3['nama_struktur']).' | '. $substruktur3['akronim'] }}@if($substruktur3['satusehat_id'] !== '' && $substruktur3['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                         </td>
                                                         <td>
                                                             <a onclick="return edit({{ $substruktur3['struktur_id'] }})"
@@ -140,7 +140,7 @@
                                                         @foreach($substruktur3['substruktur4'] as $substruktur4)
                                                         <tr class="bg-info text-white">
                                                             <td>
-                                                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur4['nama_struktur']).' | '. $substruktur4['akronim'] }}@if($substruktur4['satusehat_id'] !== '' || $substruktur4['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
+                                                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper($substruktur4['nama_struktur']).' | '. $substruktur4['akronim'] }}@if($substruktur4['satusehat_id'] !== '' && $substruktur4['satusehat_id'] !== null) <i class="fa fa-check"></i> @endif</h5>
                                                             </td>
                                                             <td>
                                                                 <a onclick="return edit({{ $substruktur4['struktur_id'] }})"
