@@ -39,6 +39,7 @@
                                         <th>Bagian</th>
                                         <th>Profesi</th>
                                         <th>Struktur Bagian</th>
+                                        <th>Satu Sehat ID</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -56,6 +57,7 @@
                                             <td>{{ $pegawai->nama_bagian }}</td>
                                             <td>{{ $pegawai->nama_profesi }}</td>
                                             <td>{{ $pegawai->nama_struktur }}</td>
+                                            <td>{{ $pegawai->satusehat_id }}</td>
                                             {{-- <td><a onclick="return edit({{ $pegawai->pegawai_id }})" class="btn text-white btn-info">Edit</a></td> --}}
                                             <td>
                                                 <a href="{{ url('pegawai/edit/'.Crypt::encrypt($pegawai->pegawai_id)) }}" class="btn text-white btn-info">Edit</a>

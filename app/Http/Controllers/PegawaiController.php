@@ -376,7 +376,7 @@ class PegawaiController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'api/practitioner',
+        CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'practitioner/cari',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -391,12 +391,13 @@ class PegawaiController extends Controller
 
         curl_close($curl);
         $res = json_decode($response);
+        // dd('ok',$response,$res);
         $res = json_decode($res);
-        if(empty($res->id)){
+        if(empty($res->entry[0]->resource->id)){
             dd($response,$res);
         }
-        $satusehat_id = $res->id;
-        // dd('ok');
+        $satusehat_id = $res->entry[0]->resource->id;
+        // dd($satusehat_id);
 
         $data = [
             'satusehat_id' => $satusehat_id,

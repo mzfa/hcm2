@@ -202,7 +202,7 @@ class StrukturController extends Controller
             $res = json_decode($response);
             $res = json_decode($res);
             if(empty($res->id)){
-                dd($response);
+                dd($res->issue[0]->code);
             }
             $satusehat_id = $res->id;
             // dd($res);
