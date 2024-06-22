@@ -22,6 +22,9 @@
                             <a tooltip="Sync Data Pegawai" onclick="return confirm('Apakah anda ingin sinkronisasi ke aplikasi PHIS?')" href="{{ url('pegawai/sync') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
                                 <i class="bi bi-sync"></i> Sync
                             </a>
+                            <a tooltip="Sync Data Pegawai" onclick="return confirm('Apakah anda ingin sinkronisasi id satu sehat?')" href="{{ url('pegawai/sync_satusehat') }}" id="create_record" class="btn btn-danger text-white shadow-sm">
+                                <i class="bi bi-sync"></i> Sync Satu Sehat
+                            </a>
                             {{-- <a tooltip="Tambah Pegawai Baru" href="{{ url('pegawai/add') }}" id="create_record" class="btn btn-primary text-white shadow-sm">
                                 <i class="bi bi-sync"></i> Tambah Pegawai Baru
                             </a> --}}

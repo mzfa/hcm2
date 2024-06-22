@@ -4,21 +4,21 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>Penggajian Parttimer</h1>
+        <h1>Penggajian</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
-            <div class="breadcrumb-item">Penggajian Parttimer</div>
+            <div class="breadcrumb-item">Penggajian</div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">Penggajian Parttimer</h2>
+        <h2 class="section-title">Penggajian</h2>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Penggajian Parttimer</h4>
+                        <h4>Penggajian</h4>
                         <div class="col-auto">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-plus"></i> Tambah
@@ -46,7 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($penggajian_manual as $item)
+                                    @foreach($penggajian_parttimer as $item)
                                         @php
                                             $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
                                             // dd($bulan[01]);
@@ -61,8 +61,8 @@
                                             <td>{{ $item->bagian  }}</td>
                                             <td>
                                                 <a onclick="return edit({{ $item->penggajian_id }})" class="btn text-white btn-info">Edit</a>
-                                                <a href="{{ url('penggajian_manual/detail/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-warning">Detail</a>
-                                                <a href="{{ url('penggajian_manual/delete/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-danger">Hapus</a>
+                                                <a href="{{ url('penggajian_parttimer/detail/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-warning">Detail</a>
+                                                <a href="{{ url('penggajian_parttimer/delete/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -79,11 +79,11 @@
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ url('penggajian_manual/import') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('penggajian_parttimer/import') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data <a href="{{ url('FORMAT IMPORT DATA.xlsx') }}" class="btn btn-warning">Download Tamplate</a></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data <a href="{{ url('FORMAT IMPORT DATA PARTTIMER.xlsx') }}" class="btn btn-warning">Download Tamplate</a></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

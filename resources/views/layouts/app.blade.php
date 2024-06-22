@@ -179,6 +179,7 @@
 
 
     $("#table-1").dataTable({
+        "aaSorting": []
         // dom: 'Bfrtip',
         // buttons: [
         //     'excel', 'pdf', 'print'

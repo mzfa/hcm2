@@ -406,6 +406,52 @@ class PegawaiController extends Controller
         return Redirect::back()->with(['success' => 'Data Satu sehat berhasil diperbarui!']);
     }
 
+    public function sync_satusehat(){
+
+        $data = DB::table('pegawai')->whereNull('pegawai.deleted_at')->whereNull('pegawai.satusehat_id')->whereNotNull('pegawai.nik')->get();
+        // $datanya = [];
+        foreach($data as $item){
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => env('BASE_URL_SATU_SEHAT').'practitioner/cari',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('nik' => $item->nik),
+            ));
+    
+            $response = curl_exec($curl);
+    
+            curl_close($curl);
+            $res = json_decode($response);
+            // dd('ok',$response,$res);
+            $res = json_decode($res);
+            if(empty($res->entry[0]->resource->id)){
+                // $satusehat_id = null;
+            }else{
+                $satusehat_id = $res->entry[0]->resource->id;
+                $datanya = [
+                    'satusehat_id' => $satusehat_id
+                ];
+                $datanya2 = [
+                    'nik' => $item->nik,
+                    'id_satu_sehat' => $satusehat_id
+                ];
+                DB::connection('PHIS-V2')->table('pegawai')->where(['pegawai_id' => $item->pegawai_id])->update($datanya2);
+                DB::table('pegawai')->where(['pegawai_id' => $item->pegawai_id])->update($datanya);
+                sleep(0.5);
+            }
+        }
+
+        // dd($datanya);
+
+        return Redirect::back()->with(['success' => 'Data Satu sehat berhasil diperbarui!']);
+    }
+
     public function sync()
     {
         // dd("ok");

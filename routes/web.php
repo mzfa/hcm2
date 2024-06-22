@@ -24,6 +24,7 @@ use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\JenisCutiController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JasaMedisController;
+use App\Http\Controllers\PenggajianParttimerController;
 use App\Http\Controllers\SlipGajiController;
 use App\Http\Controllers\SlipJasaMedisController;
 
@@ -38,13 +39,13 @@ use App\Http\Controllers\SlipJasaMedisController;
 |
 */
 
-
 Route::get('/', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login.store');
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'store'])->name('register.store');
 Route::get('/cetak', [\App\Http\Controllers\PenggajianManualController::class, 'createPDF'])->name('createPDF');
+Route::get('/cetak-parttimer/{id}', [\App\Http\Controllers\PenggajianParttimerController::class, 'cetak'])->name('cetak');
 Route::post('/logout', function () {
     auth()->logout();
     request()->session()->invalidate();
@@ -105,9 +106,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(BagianController::class)->middleware('cek_login:bagian.index')->group(function () {
         Route::get('/bagian', 'index')->name('bagian.index');
         Route::get('/bagian/sync', 'sync');
+        Route::post('/bagian/store', 'store');
+        Route::post('/bagian/update', 'update');
+        Route::get('/bagian/edit/{id}', 'edit');
+        Route::get('/bagian/delete/{id}', 'delete');
     });
     Route::controller(ProfesiController::class)->middleware('cek_login:profesi.index')->group(function () {
         Route::get('/profesi', 'index')->name('profesi.index');
+        Route::post('/profesi/store', 'store');
+        Route::post('/profesi/update', 'update');
+        Route::get('/profesi/edit/{id}', 'edit');
+        Route::get('/profesi/delete/{id}', 'delete');
         Route::get('/profesi/sync', 'sync');
     });
     Route::controller(PegawaiController::class)->middleware('cek_login:pegawai.index')->group(function () {
@@ -117,6 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pegawai/add', 'add');
         Route::get('/pegawai/export', 'export');
         Route::get('/pegawai/sync', 'sync');
+        Route::get('/pegawai/sync_satusehat', 'sync_satusehat');
         Route::post('/pegawai/store', 'store');
         Route::post('/pegawai/update_data_diri', 'update_data_diri');
         Route::post('/pegawai/tambah_keluarga', 'tambah_keluarga');
@@ -258,6 +268,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/slip_jasa_medis/store', 'store');
         Route::post('/slip_jasa_medis/update', 'update');
         Route::get('/slip_jasa_medis/delete/{id}', 'delete');
+    });
+    Route::controller(PenggajianParttimerController::class)->middleware('cek_login:penggajian_parttimer.index')->group(function () {
+        // Route::get('file-import-export', [UserController::class, 'fileImportExport']);
+        // Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
+        Route::get('/penggajian_parttimer', 'index')->name('penggajian_parttimer.index');
+        Route::post('/penggajian_parttimer/import', 'import');
+        Route::get('/penggajian_parttimer/detail/{id}', 'detail');
     });
 
 
