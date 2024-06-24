@@ -29,11 +29,16 @@ class SlipGajiController extends Controller
         if(is_null($pegawai->tanggal_lahir) && is_null($pegawai->status_kawin) && is_null($pegawai->alamat) && is_null($pegawai->telp_pribadi) && is_null($pegawai->kecamatan)){
             return Redirect('profile')->with(['error' => 'Untuk melihat slip gaji mohon melengkapi data diri anda terlebih dahulu!']);
         }
-        if($pegawai)
+        $status_pegawai = $pegawai->status_pegawai;
+        if($pegawai->status_pegawai == 'PP'){
+            $data = DB::table('penggajian_parttimer')->whereNull('penggajian_parttimer.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode_gaji','asc')->get();
+            // dd($data);
+        }else{
+            $data = DB::table('penggajian')->whereNull('penggajian.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode_gaji','asc')->get();
+        }
         // $pegawai = DB::table('pegawai')->where('pegawai_id', $pegawai_id)->first();
-        $data = DB::table('penggajian')->whereNull('penggajian.deleted_at')->where('nip',$pegawai->nip)->orderBy('periode_gaji','asc')->get();
         // dd($data);
-        return view('penggajian.slip_gaji.index', compact('data'));
+        return view('penggajian.slip_gaji.index', compact('data','status_pegawai'));
     }
     public function detail($id)
     {

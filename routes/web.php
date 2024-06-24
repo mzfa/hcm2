@@ -45,6 +45,7 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'authentica
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'store'])->name('register.store');
 Route::get('/cetak', [\App\Http\Controllers\PenggajianManualController::class, 'createPDF'])->name('createPDF');
+Route::get('/slip-gaji-parttimer/{id}', [\App\Http\Controllers\PenggajianParttimerController::class, 'detail'])->name('cetak');
 Route::get('/cetak-parttimer/{id}', [\App\Http\Controllers\PenggajianParttimerController::class, 'cetak'])->name('cetak');
 Route::post('/logout', function () {
     auth()->logout();

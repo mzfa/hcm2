@@ -60,25 +60,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($data as $item)
-                                        @php
-                                            $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
-                                            // dd($bulan[01]);
-                                            $bulan_periode = substr($item->periode_gaji, -2);
-                                            $bulan_fix = $bulan[$bulan_periode];
+                                        @foreach($data as $item)
+                                            @php
+                                                $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
+                                                // dd($bulan[01]);
+                                                $bulan_periode = substr($item->periode_gaji, -2);
+                                                $bulan_fix = $bulan[$bulan_periode];
 
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $bulan_fix }} {{ substr($item->periode_gaji,0, 4) }}</td>
-                                            <td>{{ $item->bagian }}</td>
-                                            <td>{{ $item->pendidikan }}</td>
-                                            <td>Rp. {{ number_format($item->gaji_bersih) }}</td>
-                                            <td>
-                                                <a href="{{ url('slip_gaji/detail/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-danger">Detail</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $bulan_fix }} {{ substr($item->periode_gaji,0, 4) }}</td>
+                                                <td>{{ $item->bagian }}</td>
+                                                <td>{{ $item->pendidikan }}</td>
+                                                <td>Rp. {{ number_format($item->gaji_bersih) }}</td>
+                                                <td>
+                                                    @if ($status_pegawai == 'PP')
+                                                        <a href="{{ url('slip-gaji-parttimer/'.Crypt::encrypt($item->penggajian_id)) }}" cl ass="btn text-white btn-danger">Detail</a>
+                                                    @else
+                                                        <a href="{{ url('slip_gaji/detail/'.Crypt::encrypt($item->penggajian_id)) }}" class="btn text-white btn-danger">Detail</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                 </tbody>
                             </table>
                         </div>
