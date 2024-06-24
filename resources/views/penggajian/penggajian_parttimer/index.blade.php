@@ -4,21 +4,21 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>Penggajian</h1>
+        <h1>Penggajian Parttimer</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
-            <div class="breadcrumb-item">Penggajian</div>
+            <div class="breadcrumb-item">Penggajian Parttimer</div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">Penggajian</h2>
+        <h2 class="section-title">Penggajian Parttimer</h2>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Penggajian</h4>
+                        <h4>Penggajian Parttimer</h4>
                         <div class="col-auto">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-plus"></i> Tambah

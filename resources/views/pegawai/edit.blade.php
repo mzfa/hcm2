@@ -324,6 +324,17 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Status Kepegawaian</label>
+                                                    <select name="status_pegawai" id="status_pegawai" class="form-control select2">
+                                                        <option value="">Pilih Status Kepegawaian</option>
+                                                        <option @if($data->status_pegawai == 'PKWT') selected @endif value="PKWT">Pegawai Kontrak Waktu Tertentu</option>
+                                                        <option @if($data->status_pegawai == 'PT') selected @endif value="PT">Pegawai Tetap </option>
+                                                        <option @if($data->status_pegawai == 'PP') selected @endif value="PP">Pegawai Parttimer </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <button type="button" id="savedata"
                                             class="btn btn-primary w-100 mb-2">Simpan</button>

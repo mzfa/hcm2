@@ -89,6 +89,7 @@ class PegawaiController extends Controller
             'bagian_id' => $request->bagian_id,
             'profesi_id' => $request->profesi_id,
             'struktur_id' => $request->struktur_id,
+            'status_pegawai' => $request->status_pegawai,
             'no_urut' => $no_urut,
             'nip' => $nip,
         ];
@@ -227,6 +228,7 @@ class PegawaiController extends Controller
             'tanggal_masuk' => $request->tanggal_masuk,
             'struktur_id' => $request->struktur_id,
             'grup_kepegawaian_id' => $request->grup_kepegawaian_id,
+            'status_pegawai' => $request->status_pegawai,
         ];
         // dd($data);
         DB::table('pegawai')->where(['pegawai_id' => $pegawai_id])->update($data);

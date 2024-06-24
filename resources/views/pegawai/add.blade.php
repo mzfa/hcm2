@@ -99,6 +99,17 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Status Kepegawaian</label>
+                                                <select name="status_pegawai" id="status_pegawai" class="form-control select2">
+                                                    <option value="">Pilih Status Kepegawaian</option>
+                                                    <option value="PKWT">Pegawai Kontrak Waktu Tertentu</option>
+                                                    <option value="PT">Pegawai Tetap </option>
+                                                    <option value="PP">Pegawai Parttimer </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 mb-2">Simpan</button>
                                 </form>

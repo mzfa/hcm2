@@ -81,6 +81,7 @@ class LoginController extends Controller
                     // dd($user_data);
                     $image = asset('images/profile/'.$user_data->foto);
                     session(['profesi_id' => $user_data->profesi_id]); 
+                    session(['status_pegawai' => $user_data->status_pegawai]); 
                     session(['password_detail' => $user_data->password_detail]);
                 }
                 session(['menu' => $menu]);
