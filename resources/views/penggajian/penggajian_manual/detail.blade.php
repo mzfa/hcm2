@@ -169,12 +169,18 @@
                                                 <th style="text-align: right">{{ number_format($data->pph_21_dtp) }}</th>
                                             </tr>
                                             @endif
+                                            @if($data->transportasi !== '0' && $data->transportasi !== null)
+                                            <tr>
+                                                <td>Transportasi</td>
+                                                <th style="text-align: right">{{ number_format($data->transportasi) }}</th>
+                                            </tr>
+                                            @endif
                                             <tr>
                                                 <td colspan="3"><hr></td>
                                             </tr>
                                             <tr>
                                                 {{-- <td>&nbsp;</td> --}}
-                                                <th style="text-align: right" colspan="3">Rp. {{ number_format($data->overtime + $data->double_job + $data->rapel + $data->pph_21_dtp) }}</th>
+                                                <th style="text-align: right" colspan="3">Rp. {{ number_format($data->overtime + $data->double_job + $data->rapel + $data->pph_21_dtp + $data->transportasi) }}</th>
                                             </tr>
                                         </table>
                                     </div>
