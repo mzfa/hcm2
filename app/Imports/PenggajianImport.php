@@ -57,6 +57,7 @@ class PenggajianImport implements ToCollection
                     'lain_lain' => $item[41],
                     'potongan_koperasi' => $item[42],
                     'potongan_absensi' => $item[43],
+                    'rapel_pph21_bpjs' => $item[45],
                     'total_pengurang' => $item[46],
                     'gaji_bersih' => $item[47],
                     'status_kepegawaian_manual' => $item[53],

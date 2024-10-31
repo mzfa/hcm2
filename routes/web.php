@@ -25,6 +25,7 @@ use App\Http\Controllers\JenisCutiController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JasaMedisController;
 use App\Http\Controllers\PenggajianParttimerController;
+use App\Http\Controllers\PerhitunganPPH21Controller;
 use App\Http\Controllers\SlipGajiController;
 use App\Http\Controllers\SlipJasaMedisController;
 
@@ -245,6 +246,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/penggajian_manual', 'index')->name('penggajian_manual.index');
         Route::post('/penggajian_manual/import', 'import');
         Route::get('/penggajian_manual/detail/{id}', 'detail');
+    });
+    Route::controller(PerhitunganPPH21Controller::class)->middleware('cek_login:perhitungan_pph21.index')->group(function () {
+        // Route::get('file-import-export', [UserController::class, 'fileImportExport']);
+        // Route::post('file-import', [UserController::class, 'fileImport'])->name('file-import');
+        Route::get('/perhitungan_pph21', 'index')->name('perhitungan_pph21.index');
+        Route::post('/perhitungan_pph21/import', 'import');
+        Route::get('/perhitungan_pph21/detail/{id}', 'detail');
     });
     Route::controller(JasaMedisController::class)->middleware('cek_login:jasa_medis.index')->group(function () {
         // Route::get('file-import-export', [UserController::class, 'fileImportExport']);

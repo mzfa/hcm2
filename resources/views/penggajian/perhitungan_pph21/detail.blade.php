@@ -1,10 +1,18 @@
-@extends('layouts.tamplate')
+@extends('layouts.app')
 
 @section('content')
 
 <section class="section">
+    <div class="section-header">
+        <h1>Slip Gaji</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">Home</a></div>
+            <div class="breadcrumb-item">Slip Gaji</div>
+        </div>
+    </div>
 
     <div class="section-body">
+        <h2 class="section-title">Slip Gaji <a class="btn btn-primary" href="{{ url('slip_gaji/cetak/'.Crypt::encrypt($id)) }}">Cetak</a></h2>
         @php
             $bulan = ['01' => 'Januari','02' => 'Februari','03' => 'Maret','04' => 'April','05' => 'Mei','06' => 'Juni','07' => 'Juli','08' => 'Agustus','09' => 'September','10' => 'Oktober','11' => 'November','12' => 'Desember'];
             // dd($bulan[01]);
@@ -197,12 +205,6 @@
                                                 <td>PPH 21</td>
                                                 <th style="text-align: right">{{ number_format($data->pph_21) }}</th>
                                             </tr>
-                                            @if (!empty($data->rapel_pph21_bpjs))
-                                            <tr>
-                                                <td>Rapel PPH 21 BPJS</td>
-                                                <th style="text-align: right">{{ number_format($data->rapel_pph21_bpjs) }}</th>
-                                            </tr>
-                                            @endif
                                             <tr>
                                                 <td>Potongan Obat</td>
                                                 <th style="text-align: right">{{ number_format($data->pemotongan_obat) }}</th>
@@ -274,8 +276,6 @@
 
 @section('scripts')
 <script>
-
-    window.print();
 </script>
 
 @endsection

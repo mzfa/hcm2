@@ -205,6 +205,12 @@
                                                 <td>PPH 21</td>
                                                 <th style="text-align: right">{{ number_format($data->pph_21) }}</th>
                                             </tr>
+                                            @if (!empty($data->rapel_pph21_bpjs))
+                                            <tr>
+                                                <td>Rapel PPH 21 BPJS</td>
+                                                <th style="text-align: right">{{ number_format($data->rapel_pph21_bpjs) }}</th>
+                                            </tr>
+                                            @endif
                                             <tr>
                                                 <td>Potongan Obat</td>
                                                 <th style="text-align: right">{{ number_format($data->pemotongan_obat) }}</th>
